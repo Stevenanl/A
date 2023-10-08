@@ -213,7 +213,7 @@ Artstab:Dropdown("Select Generated Art", {"Cat", "Dog", "Luffy"}, function(art)
 	if art == "Cat" then
 		generate("https://cdn.discordapp.com/attachments/1046553567101730906/1160648397909413888/Untitled31_20231009024207.png?ex=65356d0d&is=6522f80d&hm=d96b803f715c254e92f5b8518a894ee8d69a3291db8cd1d4e9866f7c8aa9c69d&")
 	elseif art == "Dog" then
-		generate("https://cdn.discordapp.com/attachments/1046553567101730906/1160676775848841237/Untitled39_20231009043452.png?ex=6535877b&is=6523127b&hm=75c84a95f6ce0ecb4e2e17adf95df842b58f65805786eec2843257acae27164d&")
+		generate("https://cdn.discordapp.com/attachments/1046553567101730906/1160678891736801391/Untitled39_20231009044251.png?ex=65358974&is=65231474&hm=d46cdcaae142c0aef5887cea043320a3f1231f70dfa04b77f64d1caf141256ae&")
 	elseif art == "Luffy" then
 		generate("https://cdn.discordapp.com/attachments/1046553567101730906/1160676017086672966/Untitled38_20231009043147.png?ex=653586c6&is=652311c6&hm=21b490d6548a0ac9e2e9dab6a99993e77a13b42016a37952aa0b7461cc3fa30b&")
 	end
