@@ -216,10 +216,10 @@ Artstab:Dropdown("Select Art", {"Tanjiro2","Cat18","Kazuha","Cat17","Cat16","Cat
 end);
 Artstab:Dropdown("Select Generated Art", {"Cat", "Dog", "Luffy"}, function(art)
 	if art == "Cat" then
-		generate("https://cdn.discordapp.com/attachments/1046553567101730906/1160648397909413888/Untitled31_20231009024207.png?ex=65356d0d&is=6522f80d&hm=d96b803f715c254e92f5b8518a894ee8d69a3291db8cd1d4e9866f7c8aa9c69d&")
+		generate("https://cdn.discordapp.com/attachments/1046553567101730906/1161015350440243312/Untitled40_20231010025951.png?ex=6536c2ce&is=65244dce&hm=56eeee9af0bcb9304c217546bfcb4549b3014c99a437e0e148b74da6e74bd685&")
 	elseif art == "Dog" then
-		generate("https://cdn.discordapp.com/attachments/1046553567101730906/1160678891736801391/Untitled39_20231009044251.png?ex=65358974&is=65231474&hm=d46cdcaae142c0aef5887cea043320a3f1231f70dfa04b77f64d1caf141256ae&")
+		generate("https://cdn.discordapp.com/attachments/1046553567101730906/1161017489627545711/Untitled40_20231010030839.png?ex=6536c4cc&is=65244fcc&hm=8cef8642b126dddf53cbaea695882cf6006c5f3cb68dab4aefd5483fe07bea72&")
 	elseif art == "Luffy" then
-		generate("https://cdn.discordapp.com/attachments/1046553567101730906/1160676017086672966/Untitled38_20231009043147.png?ex=653586c6&is=652311c6&hm=21b490d6548a0ac9e2e9dab6a99993e77a13b42016a37952aa0b7461cc3fa30b&")
+		generate("https://cdn.discordapp.com/attachments/1046553567101730906/1161018377909837824/Untitled41_20231010031218.png?ex=6536c59f&is=6524509f&hm=6fb66db1fce76881613e1ef610524372a6d0ee27f881b94785ccbba899f42043&")
 	end
 end);
