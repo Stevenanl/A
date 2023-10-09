@@ -29,6 +29,11 @@ local function toggletimer()
 				wait(1);
 			until (mins == 0) and (secs == 0) 
 			textLabel.Text = "Ready!!";
+			local new = Instance.new("Sound")
+			new.Parent = game.SoundService
+			new.SoundId = "rbxassetid://9699523130"
+			new.PlayOnRemove = true
+			new:Destroy();
 			game:GetService("StarterGui"):SetCore("SendNotification", {Title="Timer",Text="The timer has ended.",Duration=5});
 		end);
 	end
