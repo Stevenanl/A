@@ -1,19 +1,18 @@
 print("made by Stoven_Chaos")
-local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/Vape.txt"))();
-local win = lib:Window("STARVING ARTISTS", Color3.fromRGB(188, 19, 254), Enum.KeyCode.RightControl);
 local delay = nil;
 local timer = nil;
 local removeprint = false;
 local paintgui = game.Players.LocalPlayer.PlayerGui.MainGui.PaintFrame;
-local Artstab = win:Tab("Arts");
-local Visualstab = win:Tab("Visuals");
-local Otherstab = win:Tab("Others");
+local data = {};
+local function send(title,text)
+	game.StarterGui:SetCore("SendNotification", {Title=title,Text=text});
+end
 local function toggletimer()
 	if (timer == true) then
 		local textLabel = game.Players.LocalPlayer.PlayerGui.MainGui.PaintFrame.NextButton.Label;
 		local mins = (removeprint and 15) or 5;
 		local secs = 0;
-		game:GetService("StarterGui"):SetCore("SendNotification", {Title="Timer",Text="The timer has started.",Duration=5});
+		send("Timer","The timer has started.");
 		task.spawn(function()
 			repeat
 				if (string.len(secs) < 2) then
@@ -29,12 +28,7 @@ local function toggletimer()
 				wait(1);
 			until (mins == 0) and (secs == 0) 
 			textLabel.Text = "Ready!!";
-			local new = Instance.new("Sound")
-			new.Parent = game.SoundService
-			new.SoundId = "rbxassetid://9699523130"
-			new.PlayOnRemove = true
-			new:Destroy();
-			game:GetService("StarterGui"):SetCore("SendNotification", {Title="Timer",Text="The timer has ended.",Duration=5});
+			send("Timer","The timer has ended.");
 		end);
 	end
 end
@@ -77,7 +71,7 @@ local function generate(url)
 		local cells = {};
 		local index = 1;
 		if (pixels == "fstb") then
-			game.StarterGui:SetCore("SendNotification", {Title="error",Text=("the file size exceeds three megabytes, " .. "to prevent people from crashing the vps, i have set" .. " the cap to amount. sorry for the inconvenience")});
+			send("error",("the file size exceeds three megabytes, " .. "to prevent people from crashing the vps, i have set" .. " the cap to amount. sorry for the inconvenience"));
 		else
 			grid["1"].BackgroundColor3 = Color3.fromRGB(pixels[1][1], pixels[1][2], pixels[1][3]);
 			for y = 1, resolutionX, 1 do
@@ -102,12 +96,48 @@ local function generate(url)
 				grid[tostring(index)].BackgroundColor3 = Color3.fromRGB(r, g, b);
 				table.insert(cells, pixel);
 			end);
-			game.StarterGui:SetCore("SendNotification", {Title="done",Text="finished importing, check the drawing grid"});
+			send("done","finished importing, check the drawing grid");
 		end
 	end
 	import(image);
 	toggletimer()
 end
+send("Loading...","this might lagged a little")
+task.wait(.7)
+data['Tanjiro2'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Tanjiro2.lua'))()
+data['Cat18'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat18.lua'))()
+data['Kazuha'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Kazuha.lua'))()
+data['Cat17'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat17.lua'))()
+data['Cat16'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat16.lua'))()
+data['Cat15'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat15.lua'))()
+data['Cat14'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat14.lua'))()
+data['Cat13'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat13.lua'))()
+data['Cake'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cake.lua'))()
+data['Raiden_Shogun'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Raiden%20Shogun.lua'))()
+data['Nahida'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Nahida.lua'))()
+data['Tanjiro'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Tanjiro.lua'))()
+data['Dori'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Dori.lua'))()
+data['Cat12'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat12.lua'))()
+data['Cat11'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat11.lua'))()
+data['Cat10'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat10.lua'))()
+data['Diona'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Diona.lua'))()
+data['Cat9'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat9.lua'))()
+data['Anya'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Anya.lua'))()
+data['Klee'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Klee.lua'))()
+data['Cat8'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat8.lua'))()
+data['Cat7'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat7.lua'))()
+data['Cat6'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat6.lua'))()
+data['Cat5'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat5.lua'))()
+data['Cat4'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat4.lua'))()
+data['Cat3'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat3.lua'))()
+data['Cat2'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat2.lua'))()
+data['Cat1'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat1.lua'))()
+data['Cat'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat.lua'))()
+local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/Vape.txt"))();
+local win = lib:Window("STARVING ARTISTS", Color3.fromRGB(188, 19, 254), Enum.KeyCode.RightControl);
+local Artstab = win:Tab("Arts");
+local Visualstab = win:Tab("Visuals");
+local Otherstab = win:Tab("Others");
 Otherstab:Toggle("Hide PaintFrame", false, function(toggle)
 	if toggle then
 		paintgui.Visible = false;
@@ -171,36 +201,6 @@ Artstab:Textbox("Generate from URL", true, function(link)
 	generate(link)
 end);
 Artstab:Dropdown("Select Art", {"Tanjiro2","Cat18","Kazuha","Cat17","Cat16","Cat15","Cat14","Cat13","Cake","Raiden_Shogun","Nahida","Tanjiro","Dori","Cat12","Cat11","Cat10","Diona","Cat9","Anya","Klee","Cat8","Cat7","Cat6","Cat5","Cat4","Cat3","Cat2","Cat1","Cat"}, function(option)
-	local data = {};
-	data['Tanjiro2'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Tanjiro2.lua'))()
-	data['Cat18'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat18.lua'))()
-	data['Kazuha'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Kazuha.lua'))()
-	data['Cat17'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat17.lua'))()
-	data['Cat16'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat16.lua'))()
-	data['Cat15'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat15.lua'))()
-	data['Cat14'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat14.lua'))()
-	data['Cat13'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat13.lua'))()
-	data['Cake'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cake.lua'))()
-	data['Raiden_Shogun'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Raiden%20Shogun.lua'))()
-	data['Nahida'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Nahida.lua'))()
-	data['Tanjiro'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Tanjiro.lua'))()
-	data['Dori'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Dori.lua'))()
-	data['Cat12'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat12.lua'))()
-	data['Cat11'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat11.lua'))()
-	data['Cat10'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat10.lua'))()
-	data['Diona'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Diona.lua'))()
-	data['Cat9'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat9.lua'))()
-	data['Anya'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Anya.lua'))()
-	data['Klee'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Klee.lua'))()
-	data['Cat8'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat8.lua'))()
-	data['Cat7'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat7.lua'))()
-	data['Cat6'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat6.lua'))()
-	data['Cat5'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat5.lua'))()
-	data['Cat4'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat4.lua'))()
-	data['Cat3'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat3.lua'))()
-	data['Cat2'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat2.lua'))()
-	data['Cat1'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat1.lua'))()
-	data['Cat'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat.lua'))()
 	local Pixels = data[option];
 	local UI = game.Players.LocalPlayer.PlayerGui.MainGui.PaintFrame.GridHolder.Grid;
 	toggletimer()
@@ -214,12 +214,20 @@ Artstab:Dropdown("Select Art", {"Tanjiro2","Cat18","Kazuha","Cat17","Cat16","Cat
 		end
 	end
 end);
-Artstab:Dropdown("Select Generated Art", {"Cat", "Dog", "Luffy"}, function(art)
+Artstab:Dropdown("Select Generated Art", {"Cat", "Cat2", "Cat3", "Cat4", "Dog", "Luffy", "Yae Miko"}, function(art)
 	if art == "Cat" then
-		generate("https://cdn.discordapp.com/attachments/1046553567101730906/1161015350440243312/Untitled40_20231010025951.png?ex=6536c2ce&is=65244dce&hm=56eeee9af0bcb9304c217546bfcb4549b3014c99a437e0e148b74da6e74bd685&")
+		generate("https://cdn.discordapp.com/attachments/1046553567101730906/1161385120691920926/Untitled42_20231011032157.png?ex=65381b2e&is=6525a62e&hm=c816fc2a3d468f4d02c642bbf7df515b000b7f1bbd49d810032f37ffe5003d5a&")
 	elseif art == "Dog" then
-		generate("https://cdn.discordapp.com/attachments/1046553567101730906/1161017489627545711/Untitled40_20231010030839.png?ex=6536c4cc&is=65244fcc&hm=8cef8642b126dddf53cbaea695882cf6006c5f3cb68dab4aefd5483fe07bea72&")
+		generate("https://cdn.discordapp.com/attachments/1046553567101730906/1161385120259915809/Untitled42_20231011032517.png?ex=65381b2e&is=6525a62e&hm=78e437c786439fcbcca029d1402f6c92f8f6188c9c1104270e26fded626435dc&")
 	elseif art == "Luffy" then
-		generate("https://cdn.discordapp.com/attachments/1046553567101730906/1161018377909837824/Untitled41_20231010031218.png?ex=6536c59f&is=6524509f&hm=6fb66db1fce76881613e1ef610524372a6d0ee27f881b94785ccbba899f42043&")
+		generate("https://cdn.discordapp.com/attachments/1046553567101730906/1161385121019072532/Untitled42_20231011031417.png?ex=65381b2e&is=6525a62e&hm=e85404e111d09d260b12bac4c1e937a5d11c4ef581be2910d3c6a03083445b78&")
+	elseif art == "Cat2" then
+		generate("https://cdn.discordapp.com/attachments/1046553567101730906/1161388012744220823/Untitled44_20231011034103.png?ex=65381ddf&is=6525a8df&hm=8ab6d35a39bb1da4590b3daec2fc63605fecf505c923d50a8ff85e5574cc0644&")
+	elseif art == "Yae Miko" then
+		generate("https://cdn.discordapp.com/attachments/1046553567101730906/1161400367012126820/Untitled45_20231011043009.png?ex=65382961&is=6525b461&hm=a28f34b27ec18498f72b47df53b909620e9068b6de7fa7bba0de754dbeb1fc8e&")
+	elseif art == "Cat3" then
+		generate("https://cdn.discordapp.com/attachments/1046553567101730906/1161403141732962314/Untitled46_20231011044109.png?ex=65382bf6&is=6525b6f6&hm=066f578b4ae89c04e58f0616794f66ac1faef65fb59ac16024d0320ab9d4763c&")
+	elseif art == "Cat4" then
+		generate("https://cdn.discordapp.com/attachments/1046553567101730906/1161405290877558966/Untitled47_20231011044909.png?ex=65382df7&is=6525b8f7&hm=d107d2176dbcdb3f91b7768072c94b0e00443287db8abe0c1091f34a95e66976&")
 	end
 end);
