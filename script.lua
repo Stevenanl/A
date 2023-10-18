@@ -117,6 +117,7 @@ local function create(option)
 	end
 end
 send("Loading...","this might lagged a little")
+data['Cat23'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat23.lua'))()
 data['Cat20'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat20.lua'))()
 data['Cat21'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat21.lua'))()
 data['Cat22'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat22.lua'))()
@@ -220,7 +221,7 @@ end);
 Artstab:Textbox("Generate from URL", true, function(link)
 	generate(link)
 end);
-Artstab:Dropdown("Select Animals Art", {"Cat","Cat1","Cat2","Cat3","Cat4","Cat5","Cat6","Cat7","Cat8","Cat9","Cat10","Cat11","Cat12","Cat13","Cat14","Cat15","Cat16","Cat17","Cat18","Cat19","Cat20","Cat21","Cat22","Dog"}, function(option)
+Artstab:Dropdown("Select Animals Art", {"Cat","Cat1","Cat2","Cat3","Cat4","Cat5","Cat6","Cat7","Cat8","Cat9","Cat10","Cat11","Cat12","Cat13","Cat14","Cat15","Cat16","Cat17","Cat18","Cat19","Cat20","Cat21","Cat22","Cat23","Dog"}, function(option)
 	create(option)
 end);
 Artstab:Dropdown("Select Anime Art", {"Tanjiro","Tanjiro2","Anya","Luffy"}, function(option)
@@ -233,6 +234,14 @@ Artstab:Dropdown("Select Others Art", {"Cake"}, function(option)
 	create(option)
 end);
 Artstab:Button("Export grid to art data", function()
+function randomString()
+	local length = math.random(1,5)
+	local array = {}
+	for i = 1, length do
+		array[i] = string.char(math.random(32, 126))
+	end
+	return table.concat(array)
+end
 local data = {};
 local UI = game.Players.LocalPlayer.PlayerGui.MainGui.PaintFrame.GridHolder.Grid;
 for i, v in pairs(UI:GetChildren()) do
@@ -242,5 +251,5 @@ for i, v in pairs(UI:GetChildren()) do
 	end
 end
 local HttpService = game:GetService("HttpService")
-writefile("Data.txt", HttpService:JSONEncode(data))
+writefile(randomString()..".txt", HttpService:JSONEncode(data))
 end);
