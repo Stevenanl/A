@@ -117,6 +117,8 @@ local function create(option)
 	end
 end
 send("Loading...","this might lagged a little")
+task.spawn(function()
+data['Penguin'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Penguin.lua'))()
 data['Cat23'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat23.lua'))()
 data['Cat20'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat20.lua'))()
 data['Cat21'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat21.lua'))()
@@ -154,6 +156,8 @@ data['Cat1'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Steven
 data['Cat'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat.lua'))()
 data['Yae Miko'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Yae%20Miko.lua'))()
 data['Luffy'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Luffy.lua'))()
+end)
+task.wait(2)
 local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/Vape.txt"))();
 local win = lib:Window("STARVING ARTISTS", Color3.fromRGB(188, 19, 254), Enum.KeyCode.RightControl);
 local Artstab = win:Tab("Arts");
@@ -221,7 +225,7 @@ end);
 Artstab:Textbox("Generate from URL", true, function(link)
 	generate(link)
 end);
-Artstab:Dropdown("Select Animals Art", {"Cat","Cat1","Cat2","Cat3","Cat4","Cat5","Cat6","Cat7","Cat8","Cat9","Cat10","Cat11","Cat12","Cat13","Cat14","Cat15","Cat16","Cat17","Cat18","Cat19","Cat20","Cat21","Cat22","Cat23","Dog"}, function(option)
+Artstab:Dropdown("Select Animals Art", {"Cat","Cat1","Cat2","Cat3","Cat4","Cat5","Cat6","Cat7","Cat8","Cat9","Cat10","Cat11","Cat12","Cat13","Cat14","Cat15","Cat16","Cat17","Cat18","Cat19","Cat20","Cat21","Cat22","Cat23","Dog","Penguin"}, function(option)
 	create(option)
 end);
 Artstab:Dropdown("Select Anime Art", {"Tanjiro","Tanjiro2","Anya","Luffy"}, function(option)
