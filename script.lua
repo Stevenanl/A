@@ -256,5 +256,5 @@ for i, v in pairs(UI:GetChildren()) do
 	end
 end
 local HttpService = game:GetService("HttpService")
-writefile(randomString()..".txt", HttpService:JSONEncode(data))
+writefile(randomString().."starvart.txt", HttpService:JSONEncode(data))
 end);
