@@ -1,3 +1,4 @@
+-- loadstring(game:HttpGet("https://raw.githubusercontent.com/Stevenanl/A/main/script.lua"))()
 print("made by Stoven_Chaos")
 local delay = nil;
 local timer = nil;
