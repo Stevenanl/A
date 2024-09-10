@@ -499,9 +499,6 @@ local function check(Object)
 				if InstantToggle then
 					Object.HoldDuration = -Object.HoldDuration;
 				end
-				if (Object.Name == "EnterPrompt") then
-					Object.Enabled = true;
-				end
 				table.insert(prox, Object);
 			elseif (Object.Name == "DoorFake") then
 				Object:WaitForChild("Hidden").CanTouch = false;
@@ -529,16 +526,17 @@ local function check(Object)
 				if (Object.Name == "Egg") then
 					Object.CanTouch = false;
 				end
-			elseif (Object.Name == "Snare") then
-				Object:WaitForChild("Hitbox", 5).CanTouch = false;
-			--[[broken.
-			elseif (Object.Name == "Eyes") or Object.Name == "BackdoorLookman" then
-				if Object:FindFirstChild("Core") and Object.ClassName ~= "ParticleEmitter" then
-					Object.Core:Destroy();
+			elseif Object:IsA("Model") then
+				if (Object.Name == "Snare") then
+					Object:WaitForChild("Hitbox", 5).CanTouch = false;
 				end
-				task.wait(0.3);
-				EyesOnMap = true;
-				MotorReplication:FireServer(0, -120, 0, false);]]
+				if not Object:GetAttribute("Material") then Object:SetAttribute("Material", Object.Material) end
+         	   if not Object:GetAttribute("Reflectance") then Object:SetAttribute("Reflectance", Object.Reflectance) end
+          	  Object.Material = Enum.Material.Plastic
+          	  Object.Reflectance = 0
+			elseif Object:IsA("Decal") then
+				if not Object:GetAttribute("Transparency") then Object:SetAttribute("Transparency", Object.Transparency) end
+				Object.Transparency = 1
 			end
 		end);
 	end
