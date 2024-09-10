@@ -530,13 +530,6 @@ local function check(Object)
 				if (Object.Name == "Snare") then
 					Object:WaitForChild("Hitbox", 5).CanTouch = false;
 				end
-				if not Object:GetAttribute("Material") then Object:SetAttribute("Material", Object.Material) end
-         	   if not Object:GetAttribute("Reflectance") then Object:SetAttribute("Reflectance", Object.Reflectance) end
-          	  Object.Material = Enum.Material.Plastic
-          	  Object.Reflectance = 0
-			elseif Object:IsA("Decal") then
-				if not Object:GetAttribute("Transparency") then Object:SetAttribute("Transparency", Object.Transparency) end
-				Object.Transparency = 1
 			end
 		end);
 	end
