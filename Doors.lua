@@ -605,6 +605,12 @@ local function ApplySettings(Object)
 							if (IsValid[1] == "Wardrobe") then
 								TXT = "";
 							end
+							if (IsValid[1] == "Anchor") then
+								local sign = Object:WaitForChild("Sign", 5)
+								if sign and sign:FindFirstChild("TextLabel") then
+									TXT = string.format("Anchor %s", sign.TextLabel.Text);
+								end
+							end
 							if (IsValid[1] == "Gold") then
 								TXT = Object:GetAttribute("GoldValue") .. " Gold";
 							end
