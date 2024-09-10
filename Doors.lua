@@ -376,7 +376,8 @@ local function setup(room)
 		end);
 	end
 end
-CR.ChildAdded:Connect(function(room)
+local AuraFunction;
+AuraFunction = CR.ChildAdded:Connect(function(room)
 	if (AuraToggle == true) then
 		setup(room);
 	end
@@ -965,8 +966,14 @@ AuraButton.MouseButton1Down:Connect(function()
 				setup(room);
 			end
 		end
+		AuraFunction = CR.ChildAdded:Connect(function(room)
+			if (AuraToggle == true) then
+				setup(room);
+			end
+		end);
 	elseif AuraToggle then
 		AuraToggle = false;
+		AuraFunction:Disconnect()
 		AuraButton.Text = "Aura";
 		AuraButton.BackgroundColor3 = Color3.fromRGB(50, 205, 50);
 	end
