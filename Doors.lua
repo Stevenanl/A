@@ -1,3 +1,4 @@
+-- loadstring(game:HttpGet("https://raw.githubusercontent.com/Stevenanl/A/main/Doors.lua"))()
 -- Chest_Vine ActivateEventPrompt Green_Herb Plant HerbPrompt
 if myowndoorsscript then return end
 pcall(function() getgenv().myowndoorsscript = true end)
