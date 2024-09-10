@@ -672,7 +672,7 @@ local function ApplySettings(Object)
 				end
 			end
 		end
-	end
+	end--[[
 	task.spawn(function()
 		if Object:IsA('ForceField') then
 			RunService.Heartbeat:Wait()
@@ -695,7 +695,7 @@ local function ApplySettings(Object)
 			Object.BlastPressure = 1
 			Object.BlastRadius = 1
 		end
-	end)
+	end)]]
 end
 for _, Player in pairs(game.Players:GetPlayers()) do
 	if (Player ~= plr) then
