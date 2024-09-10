@@ -458,37 +458,12 @@ for i,v in pairs(game:GetDescendants()) do
 		v.BlastPressure = 1
 		v.BlastRadius = 1
 	end
-end
+end]]
 for i,v in pairs(Lighting:GetDescendants()) do
 	if v:IsA("BlurEffect") or v:IsA("SunRaysEffect") or v:IsA("ColorCorrectionEffect") or v:IsA("BloomEffect") or v:IsA("DepthOfFieldEffect") then
 		v.Enabled = false
 	end
 end
-ws.DescendantAdded:Connect(function(child)
-	task.spawn(function()
-		if child:IsA('ForceField') then
-			RunService.Heartbeat:Wait()
-			child:Destroy()
-		elseif child:IsA('Sparkles') then
-			RunService.Heartbeat:Wait()
-			child:Destroy()
-		elseif child:IsA('Smoke') or child:IsA('Fire') then
-			RunService.Heartbeat:Wait()
-			child:Destroy()
-		end
-		if child:IsA("Part") or child:IsA("UnionOperation") or child:IsA("MeshPart") or child:IsA("CornerWedgePart") or child:IsA("TrussPart") then
-			child.Material = "Plastic"
-			child.Reflectance = 0
-		elseif child:IsA("Decal") then
-			child.Transparency = 1
-		elseif child:IsA("ParticleEmitter") or child:IsA("Trail") then
-			child.Lifetime = NumberRange.new(0)
-		elseif child:IsA("Explosion") then
-			child.BlastPressure = 1
-			child.BlastRadius = 1
-		end
-	end)
-end)]]
 local function check(Object)
 	lagdetect()
 	if not lag then
@@ -698,6 +673,29 @@ local function ApplySettings(Object)
 			end
 		end
 	end
+	task.spawn(function()
+		if Object:IsA('ForceField') then
+			RunService.Heartbeat:Wait()
+			Object:Destroy()
+		elseif Object:IsA('Sparkles') then
+			RunService.Heartbeat:Wait()
+			Object:Destroy()
+		elseif Object:IsA('Smoke') or Object:IsA('Fire') then
+			RunService.Heartbeat:Wait()
+			Object:Destroy()
+		end
+		if Object:IsA("Part") or Object:IsA("UnionOperation") or Object:IsA("MeshPart") or Object:IsA("CornerWedgePart") or Object:IsA("TrussPart") then
+			Object.Material = "Plastic"
+			Object.Reflectance = 0
+		elseif Object:IsA("Decal") then
+			Object.Transparency = 1
+		elseif Object:IsA("ParticleEmitter") or Object:IsA("Trail") then
+			Object.Lifetime = NumberRange.new(0)
+		elseif Object:IsA("Explosion") then
+			Object.BlastPressure = 1
+			Object.BlastRadius = 1
+		end
+	end)
 end
 for _, Player in pairs(game.Players:GetPlayers()) do
 	if (Player ~= plr) then
