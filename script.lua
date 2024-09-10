@@ -247,15 +247,15 @@ function randomString()
 	end
 	return table.concat(array)
 end
-local data = {};
+local datacopy = {};
 local UI = game.Players.LocalPlayer.PlayerGui.MainGui.PaintFrame.GridHolder.Grid;
 for i, v in pairs(UI:GetChildren()) do
 	if (v:IsA("GuiObject") and v.Name ~= "Template") then
 		local Colour = v.BackgroundColor3
-		table.insert(data, {R = math.floor(Colour.R * 255), G = math.floor(Colour.G * 255), B = math.floor(Colour.B * 255)})
+		table.insert(datacopy, {R = math.floor(Colour.R * 255), G = math.floor(Colour.G * 255), B = math.floor(Colour.B * 255)})
 	end
 end
 local HttpService = game:GetService("HttpService")
-writefile(randomString().."starvart.txt", HttpService:JSONEncode(data))
+writefile(randomString().."starvart.txt", HttpService:JSONEncode(datacopy))
 send("successfully exported","check your executor workspace folder")
 end);
