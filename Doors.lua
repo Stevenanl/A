@@ -20,7 +20,7 @@ local ESPToggle = true;
 local FlyToggle = false;
 local ChatWarnToggle = false;
 local InstantToggle = true;
-local SeekToggle = true;
+local SeekToggle = false;
 local SpeedToggle = false;
 local espstuff = {};
 local GameData = rs.GameData;
@@ -821,8 +821,8 @@ end
 if ((Floor.Value == "Hotel") or (Floor.Value == "Mines") or (Floor.Value == "Fools")) then
 	SeekButton = Instance.new("TextButton");
 	SeekButton.Parent = ScreenGui;
-	SeekButton.Text = "Seek";
-	SeekButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0);
+	SeekButton.Text = "NoSeek";
+	SeekButton.BackgroundColor3 = Color3.fromRGB(50, 205, 50);
 	SeekButton.BorderColor3 = Color3.fromRGB(0, 100, 0);
 	SeekButton.Position = ((Floor.Value == "Hotel") and UDim2.new(0, 390, 0, -30)) or UDim2.new(0, 350, 0, -30);
 	SeekButton.Size = UDim2.new(0, 30, 0, 30);
@@ -915,7 +915,6 @@ if ((Floor.Value == "Hotel") or (Floor.Value == "Mines") or (Floor.Value == "Foo
 									if (hum.Health == 0) then
 										ESPButton.Position = UDim2.new(0, 150, 0, -30);
 										ChatWarnButton.Position = UDim2.new(0, 190, 0, -30);
-										EBFButton.Position = UDim2.new(0, 230, 0, -30);
 									else
 										AuraButton.Position = UDim2.new(0, 150, 0, -30);
 										ESPButton.Position = UDim2.new(0, 190, 0, -30);
@@ -1159,29 +1158,55 @@ SpeedButton.MouseButton1Down:Connect(function()
 		end
 	end
 end);
-repeat
-	task.wait(0.1);
-until hum.Health == 0 
-AuraToggle = false;
-FlyToggle = false;
-InstantToggle = false;
-SeekToggle = false;
-SpeedToggle = false;
-AuraButton.Visible = false;
-FlyButton.Visible = false;
-InstantButton.Visible = false;
-SpeedButton.Visible = false;
-SeekButton.Visible = false;
-if (Floor.Value == "Hotel") then
-	if (FigureButton.Visible == false) then
-		ESPButton.Position = UDim2.new(0, 150, 0, -30);
-		ChatWarnButton.Position = UDim2.new(0, 190, 0, -30);
+plr:GetPropertyChangedSignal("Alive"):Connect(function()
+	if char:GetAttribute("Alive") then
+		AuraToggle = true;
+		FlyToggle = true;
+		InstantToggle = true;
+		SeekToggle = true;
+		SpeedToggle = true;
+		AuraButton.Visible = true;
+		FlyButton.Visible = true;
+		InstantButton.Visible = true;
+		SpeedButton.Visible = true;
+		SeekButton.Visible = true;
+		if (Floor.Value == "Hotel") then
+			if (FigureButton.Visible == false) then
+				ESPButton.Position = UDim2.new(0, 190, 0, -30);
+				ChatWarnButton.Position = UDim2.new(0, 270, 0, -30);
+			else
+				ESPButton.Position = UDim2.new(0, 230, 0, -30);
+				ChatWarnButton.Position = UDim2.new(0, 310, 0, -30);
+			end
+			EBFButton.Visible = true;
+		else
+			ESPButton.Position = UDim2.new(0, 190, 0, -30);
+			ChatWarnButton.Position = UDim2.new(0, 270, 0, -30);
+		end
 	else
-		ESPButton.Position = UDim2.new(0, 190, 0, -30);
-		ChatWarnButton.Position = UDim2.new(0, 230, 0, -30);
+		AuraToggle = false;
+		FlyToggle = false;
+		InstantToggle = false;
+		SeekToggle = false;
+		SpeedToggle = false;
+		AuraButton.Visible = false;
+		FlyButton.Visible = false;
+		InstantButton.Visible = false;
+		SpeedButton.Visible = false;
+		SeekButton.Visible = false;
+		if (Floor.Value == "Hotel") then
+			if (FigureButton.Visible == false) then
+				ESPButton.Position = UDim2.new(0, 150, 0, -30);
+				ChatWarnButton.Position = UDim2.new(0, 190, 0, -30);
+			else
+				ESPButton.Position = UDim2.new(0, 190, 0, -30);
+				ChatWarnButton.Position = UDim2.new(0, 230, 0, -30);
+			end
+			EBFButton.Visible = false;
+		else
+			ESPButton.Position = UDim2.new(0, 150, 0, -30);
+			ChatWarnButton.Position = UDim2.new(0, 190, 0, -30);
+		end
+		pcall(function() AuraFunction:Disconnect() end)
 	end
-	EBFButton.Visible = false;
-else
-	ESPButton.Position = UDim2.new(0, 150, 0, -30);
-	ChatWarnButton.Position = UDim2.new(0, 190, 0, -30);
 end
