@@ -1158,8 +1158,10 @@ SpeedButton.MouseButton1Down:Connect(function()
 		end
 	end
 end);
+local alive;
 plr:GetPropertyChangedSignal("Alive"):Connect(function()
-	if char:GetAttribute("Alive") then
+	alive = plr:GetAttribute("Alive")
+	if alive then
 		AuraToggle = true;
 		FlyToggle = true;
 		InstantToggle = true;
@@ -1209,4 +1211,4 @@ plr:GetPropertyChangedSignal("Alive"):Connect(function()
 		end
 		pcall(function() AuraFunction:Disconnect() end)
 	end
-end
+end)
