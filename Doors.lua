@@ -740,11 +740,6 @@ mt.__namecall = newcclosure(function(remote, ...)
 end);
 setreadonly(mt, true);
 Lighting.FogEnd = 100000;
-for i, v in pairs(Lighting:GetDescendants()) do
-	if v:IsA("Atmosphere") then
-		v:Destroy();
-	end
-end
 local ScreenGui = Instance.new("ScreenGui");
 ScreenGui.Parent = pg;
 ScreenGui.Name = "blephaha";
