@@ -1,7 +1,6 @@
 -- loadstring(game:HttpGet("https://raw.githubusercontent.com/Stevenanl/A/main/Doors.lua"))()
 -- Chest_Vine ActivateEventPrompt Green_Herb Plant HerbPrompt
 if myowndoorsscript then return end
-pcall(function() getgenv().myowndoorsscript = true end)
 game.StarterGui:SetCore("ResetButtonCallback", true);
 local function send(message)
 	require(game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game).caption(message, nil, 5);
@@ -58,6 +57,7 @@ end
 local alreadypassedfirstfigure = false;
 local NoGold = Mod:FindFirstChild("GoldSpawnNone");
 local NoItem = Mod:FindFirstChild("ItemSpawnNone");
+pcall(function() getgenv().myowndoorsscript = true end)
 local function setup(room)
 	lagdetect();
 	if not lag then
@@ -739,6 +739,7 @@ mt.__namecall = newcclosure(function(remote, ...)
 	return old_mt(remote, table.unpack(args));
 end);
 setreadonly(mt, true);
+Lighting = game:GetService("Lighting")
 Lighting.FogEnd = 100000;
 for i, v in pairs(Lighting:GetDescendants()) do
 	if v:IsA("Atmosphere") then
