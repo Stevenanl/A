@@ -1171,14 +1171,14 @@ char:GetPropertyChangedSignal("Hiding"):Connect(function()
                     for _, v in pairs(obj.Parent:GetChildren()) do
                         if not v:IsA("BasePart") then continue end
 
-                        v.Transparency = Options.HidingTransparency.Value
+                        v.Transparency = 0.3
                         table.insert(affectedParts, v)
                     end
 
                     repeat task.wait()
                         for _, part in pairs(affectedParts) do
                             task.wait()
-                            part.Transparency = Options.HidingTransparency.Value
+                            part.Transparency = 0.3
                         end
                     until not char:GetAttribute("Hiding")
                     
