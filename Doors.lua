@@ -9,7 +9,7 @@ local function sendchat(message)
 	game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(message);
 end
 local ws = workspace;
-local plr = game.Players.LocalPlayer;
+local plr = game:GetService("Players").LocalPlayer;
 local pg = plr.PlayerGui;
 local char = plr.Character;
 local hum = char.Humanoid;
@@ -1160,9 +1160,41 @@ SpeedButton.MouseButton1Down:Connect(function()
 		end
 	end
 end);
+char:GetPropertyChangedSignal("Hiding"):Connect(function()
+	if char:GetAttribute("Hiding") then
+        for _, obj in pairs(CR:GetDescendants()) do
+            if not obj:IsA("ObjectValue") and obj.Name ~= "HiddenPlayer" then continue end
+
+            if obj.Value == char then
+                task.spawn(function()
+                    local affectedParts = {}
+                    for _, v in pairs(obj.Parent:GetChildren()) do
+                        if not v:IsA("BasePart") then continue end
+
+                        v.Transparency = Options.HidingTransparency.Value
+                        table.insert(affectedParts, v)
+                    end
+
+                    repeat task.wait()
+                        for _, part in pairs(affectedParts) do
+                            task.wait()
+                            part.Transparency = Options.HidingTransparency.Value
+                        end
+                    until not char:GetAttribute("Hiding")
+                    
+                    for _, v in pairs(affectedParts) do
+                        v.Transparency = 0
+                    end
+                end)
+
+                break
+            end
+        end
+    end
+end)
 local alive;
-plr:GetPropertyChangedSignal("Alive"):Connect(function()
-	alive = plr:GetAttribute("Alive")
+plr:GetPropertyChangedSignal("IsAlive"):Connect(function()
+	alive = plr:GetAttribute("IsAlive")
 	if alive then
 		AuraToggle = true;
 		FlyToggle = true;
