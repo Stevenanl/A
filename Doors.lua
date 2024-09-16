@@ -1193,8 +1193,8 @@ char:GetAttributeChangedSignal("Hiding"):Connect(function()
     end
 end)
 local alive;
-plr:GetPropertyChangedSignal("IsAlive"):Connect(function()
-	alive = plr:GetAttribute("IsAlive")
+plr:GetAttributeChangedSignal("Alive"):Connect(function()
+	alive = plr:GetAttribute("Alive")
 	if alive then
 		AuraToggle = true;
 		FlyToggle = true;
