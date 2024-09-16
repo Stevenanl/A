@@ -35,7 +35,7 @@ local EntityInfo = ((Floor.Value == "Fools") and rs.EntityInfo) or rs.RemotesFol
 local MotorReplication = EntityInfo.MotorReplication;
 local ESP_Items = {AlarmClock={"AlarmClock",1.5},AlarmClockModel={"AlarmClock",1.5},BandagePack={"BandagePack",1.5},BatteryPack={"BatteryPack",1.5},KeyObtain={"Key",1.5},FuseObtain={"Fuse",1.5},Glowsticks={"Glowsticks",1.5},Bulklight={"BulkLight",1.5},Straplight={"StrapLight",1.5},LaserPointer={"LaserPointer",1.5},Shears={"Shears",1.5},ShieldMini={"Mini Shield",1.5},ShieldBig={"Big Shield",1.5},StarVial={"Starlight Vial",1.5},LiveHintBook={"Book",1.5},Lighter={"Lighter",1.5},Lockpick={"Lockpicks",1.5},Vitamins={"Vitamins",1.5},Crucifix={"Crucifix",1.5},CrucifixWall={"Crucifix",1.5},SkeletonKey={"Skeleton Key",1.5},Flashlight={"Flashlight",1.5},Candle={"Candle",1.5},LiveBreakerPolePickup={"Fuse",1.5},Battery={"Battery",1.5},PickupItem={"Paper",1.5},ElectricalKeyObtain={"Electrical Key",1.5},Shakelight={"Shakelight",1.5},Scanner={"Scanner",1.5}};
 local ESP_Entities = {FigureRig={"Figure",1.5},Grumbo={"Grumble",5},GiggleCeiling={"Giggle",5},RushMoving={"Rush",5},AmbushMoving={"Ambush",5},BackdoorRush={"Blitz",5},FigureRagdoll={"Figure",7},FigureLibrary={"Figure",7},SeekMovingNewClone={"Seek",5.5},SeekMoving={"Seek",5.5},A60={"A-60",10},A120={"A-120",10},Wardrobe={"Wardrobe",5}};
-local ESP_Other = {Chest_Vine={"ChestVine",5},MinesAnchor={"Anchor",5},Door={"Door",5},LeverForGate={"Lever",3},TimerLever={"Lever",3},GoldPile={"Gold",0.5},Bandage={"Bandage",0.5}};
+local ESP_Other = {Toolshed_Small={"Toolshed",5}Chest_Vine={"ChestVine",5},MinesAnchor={"Anchor",5},Door={"Door",5},LeverForGate={"Lever",3},TimerLever={"Lever",3},GoldPile={"Gold",0.5},Bandage={"Bandage",0.5}};
 local EyesOnMap = false;
 local OldEnabled = {};
 local OldEsp = {};
@@ -1192,10 +1192,8 @@ char:GetAttributeChangedSignal("Hiding"):Connect(function()
         end
     end
 end)
-local alive;
 plr:GetAttributeChangedSignal("Alive"):Connect(function()
-	alive = plr:GetAttribute("Alive")
-	if alive then
+	if plr:GetAttribute("Alive") then
 		AuraToggle = true;
 		FlyToggle = true;
 		InstantToggle = true;
