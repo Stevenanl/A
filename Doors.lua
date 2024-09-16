@@ -395,8 +395,8 @@ ws.Camera.DescendantAdded:Connect(function(child)
 		else
 			game:GetService("ReplicatedStorage"):WaitForChild("RemotesFolder"):WaitForChild("Screech"):FireServer(unpack(args));
 		end
+		send("hey, there\'s.. something behind you")
 	end
-	send("hey, there\'s.. something behind you")
 	-- laggy. child:Destroy();
 end);
 local ScreechSafeRooms = {};
