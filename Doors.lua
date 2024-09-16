@@ -1160,7 +1160,7 @@ SpeedButton.MouseButton1Down:Connect(function()
 		end
 	end
 end);
-char:GetPropertyChangedSignal("Hiding"):Connect(function()
+char:GetAttributeChangedSignal("Hiding"):Connect(function()
 	if char:GetAttribute("Hiding") then
         for _, obj in pairs(CR:GetDescendants()) do
             if not obj:IsA("ObjectValue") and obj.Name ~= "HiddenPlayer" then continue end
