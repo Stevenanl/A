@@ -9,7 +9,8 @@ local function sendchat(message)
 	game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(message);
 end
 local ws = workspace;
-local plr = game:GetService("Players").LocalPlayer;
+local plrs = game:GetService("Players");
+local plr = plrs.LocalPlayer;
 local pg = plr.PlayerGui;
 local char = plr.Character;
 local hum = char.Humanoid;
@@ -57,6 +58,15 @@ end
 local alreadypassedfirstfigure = false;
 local NoGold = Mod:FindFirstChild("GoldSpawnNone");
 local NoItem = Mod:FindFirstChild("ItemSpawnNone");
+local howmanyplayers = 0;
+local multiplayer = false;
+for i, v in pairs(plrs:GetChildren()) do
+	howmanyplayers += 1
+end
+if howmanyplayers > 1 then
+	multiplayer = true;
+end
+print(multiplayer)
 pcall(function() getgenv().myowndoorsscript = true end)
 local function setup(room)
 	lagdetect();
@@ -490,6 +500,27 @@ local function check(Object)
 				end
 			elseif ((Object.Name == "Collision") and (Object.Parent.Name == "TriggerEventCollision")) then
 				if SeekToggle then
+					if (hum.Health ~= 0) then
+						task.wait(0.4);
+						Object.CanCollide = true;
+						Object.CFrame = char.Collision.CFrame;
+						Object.CanCollide = false;
+						Object.CFrame = char.Collision.CFrame;
+						send("Triggered.");
+					end
+				end
+			elseif ((Object.Name == "Collision") and (Object.Parent.Name == "MinecartCollision")) then
+				if multiplayer then
+					if (hum.Health ~= 0) then
+						task.wait(0.4);
+						Object.CanCollide = true;
+						Object.CFrame = char.Collision.CFrame;
+						Object.CanCollide = false;
+						Object.CFrame = char.Collision.CFrame;
+						send("Triggered.");
+					end
+				else
+					repeat task.wait() until LTR.Value == 45
 					if (hum.Health ~= 0) then
 						task.wait(0.4);
 						Object.CanCollide = true;
