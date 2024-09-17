@@ -66,7 +66,6 @@ end
 if howmanyplayers > 1 then
 	multiplayer = true;
 end
-print(multiplayer)
 pcall(function() getgenv().myowndoorsscript = true end)
 local function setup(room)
 	lagdetect();
