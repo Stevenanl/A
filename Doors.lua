@@ -521,6 +521,13 @@ local function check(Object)
 	end
 	if ((Object.Name == "Collision") and (Object.Parent.Name == "MinecartCollision")) then
 		task.wait(1);
+		if (hum.Health ~= 0) then
+			Object.CanCollide = true;
+			Object.CFrame = char.Collision.CFrame;
+			Object.CanCollide = false;
+			Object.CFrame = char.Collision.CFrame;
+			send("skipped to minecart.");
+		end--[[ hold on!
 		if multiplayer then
 			if (hum.Health ~= 0) then
 				Object.CanCollide = true;
@@ -538,7 +545,7 @@ local function check(Object)
 				Object.CFrame = char.Collision.CFrame;
 				send("skipped to minecart.");
 			end
-		end
+		end]]
 	end
 end
 for i, Object in pairs(CR:GetDescendants()) do
