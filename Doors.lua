@@ -521,7 +521,7 @@ local function check(Object)
 	end
 	if ((Object.Name == "Collision") and (Object.Parent.Name == "MinecartCollision")) then
 		task.wait(1);
-		if (hum.Health ~= 0) then
+		if (hum.Health ~= 0) and not SeekToggle then
 			Object.CanCollide = true;
 			Object.CFrame = char.Collision.CFrame;
 			Object.CanCollide = false;
