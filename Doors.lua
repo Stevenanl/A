@@ -537,6 +537,8 @@ local function check(Object)
 				if (Object.Name == "Snare") then
 					Object:WaitForChild("Hitbox", 5).CanTouch = false;
 				end
+			else
+				return;
 			end
 		end);
 	end
