@@ -508,27 +508,6 @@ local function check(Object)
 						send("Triggered.");
 					end
 				end
-			elseif ((Object.Name == "Collision") and (Object.Parent.Name == "MinecartCollision")) then
-				if multiplayer then
-					if (hum.Health ~= 0) then
-						task.wait(0.4);
-						Object.CanCollide = true;
-						Object.CFrame = char.Collision.CFrame;
-						Object.CanCollide = false;
-						Object.CFrame = char.Collision.CFrame;
-						send("skipped to minecart.");
-					end
-				else
-					LTR.Changed:Wait()
-					if (hum.Health ~= 0) then
-						task.wait(0.4);
-						Object.CanCollide = true;
-						Object.CFrame = char.Collision.CFrame;
-						Object.CanCollide = false;
-						Object.CFrame = char.Collision.CFrame;
-						send("skipped to minecart.");
-					end
-				end
 			elseif Object:IsA("BasePart") then
 				if (Object.Name == "Egg") then
 					Object.CanTouch = false;
@@ -539,6 +518,28 @@ local function check(Object)
 				end
 			end
 		end);
+	end
+	if ((Object.Name == "Collision") and (Object.Parent.Name == "MinecartCollision")) then
+		if multiplayer then
+			if (hum.Health ~= 0) then
+				task.wait(0.4);
+				Object.CanCollide = true;
+				Object.CFrame = char.Collision.CFrame;
+				Object.CanCollide = false;
+				Object.CFrame = char.Collision.CFrame;
+				send("skipped to minecart.");
+			end
+		else
+			LTR.Changed:Wait()
+			if (hum.Health ~= 0) then
+				task.wait(0.4);
+				Object.CanCollide = true;
+				Object.CFrame = char.Collision.CFrame;
+				Object.CanCollide = false;
+				Object.CFrame = char.Collision.CFrame;
+				send("skipped to minecart.");
+			end
+		end
 	end
 end
 for i, Object in pairs(CR:GetDescendants()) do
