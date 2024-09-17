@@ -516,17 +516,17 @@ local function check(Object)
 						Object.CFrame = char.Collision.CFrame;
 						Object.CanCollide = false;
 						Object.CFrame = char.Collision.CFrame;
-						send("Triggered.");
+						send("skipped to minecart.");
 					end
 				else
-					repeat task.wait() until LTR.Value == 45
+					LTR.Changed:Wait()
 					if (hum.Health ~= 0) then
 						task.wait(0.4);
 						Object.CanCollide = true;
 						Object.CFrame = char.Collision.CFrame;
 						Object.CanCollide = false;
 						Object.CFrame = char.Collision.CFrame;
-						send("Triggered.");
+						send("skipped to minecart.");
 					end
 				end
 			elseif Object:IsA("BasePart") then
@@ -537,8 +537,6 @@ local function check(Object)
 				if (Object.Name == "Snare") then
 					Object:WaitForChild("Hitbox", 5).CanTouch = false;
 				end
-			else
-				return;
 			end
 		end);
 	end
