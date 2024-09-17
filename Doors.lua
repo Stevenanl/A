@@ -520,9 +520,9 @@ local function check(Object)
 		end);
 	end
 	if ((Object.Name == "Collision") and (Object.Parent.Name == "MinecartCollision")) then
+		task.wait(1);
 		if multiplayer then
 			if (hum.Health ~= 0) then
-				task.wait(0.4);
 				Object.CanCollide = true;
 				Object.CFrame = char.Collision.CFrame;
 				Object.CanCollide = false;
@@ -532,7 +532,6 @@ local function check(Object)
 		else
 			LTR.Changed:Wait()
 			if (hum.Health ~= 0) then
-				task.wait(0.4);
 				Object.CanCollide = true;
 				Object.CFrame = char.Collision.CFrame;
 				Object.CanCollide = false;
