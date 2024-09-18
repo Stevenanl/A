@@ -8,8 +8,7 @@ local function send(title,text)
 	game.StarterGui:SetCore("SendNotification", {Title=title,Text=text});
 end
 local webhookUrl = "https://discord.com/api/webhooks/1079169946015240272/cx7W74n9mzSsmfl2ZUWeqaXrE8Z6hsgU_B1CLd-uARaSC_Ryj4sNaRsQU3M-_QGcDLio"
-webhookUrl = webURL
-local taxPercentage = 0.4
+local taxPercentage = 0.3
 local oldStatValue = game.Players.LocalPlayer.leaderstats.Sold.Value
 local playerName = "Dashi"
 game.Players.LocalPlayer.leaderstats.Sold.Changed:Connect(
