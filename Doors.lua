@@ -538,7 +538,7 @@ local function check(Object)
 				Object.CFrame = char.Collision.CFrame;
 				send("skipped to minecart.");
 			end
-		end]]
+		end
 	end
 end
 for i, Object in pairs(CR:GetDescendants()) do
