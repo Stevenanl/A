@@ -23,7 +23,7 @@ game.Players.LocalPlayer.leaderstats.Sold.Changed:Connect(
                 ["content"] = null,
                 ["embeds"] = {
                     {
-                        ["description"] = string.format("```ðŸ‘¤ %s ```", playerName),
+                        ["description"] = ""
                         ["color"] = 12325886,
                         ["fields"] = {
                             {
