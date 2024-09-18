@@ -109,11 +109,11 @@ local function toggletimer()
                 ["content"] = null,
                 ["embeds"] = {
                     {
-                        ["description"] = string.format("```ðŸ‘¤ %s ```", playerName),
+                        ["description"] = "what is this"
                         ["color"] = 12325886,
                         ["fields"] = {
                             {
-                                ["name"] = string.format("__%s sold art for %dR$!__", playerName, diff),
+                                ["name"] = "ding ding!"
                                 ["value"] = "hello " .. playerName .. " your art is done."
                             }
                         },
