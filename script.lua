@@ -1,5 +1,4 @@
 -- loadstring(game:HttpGet("https://raw.githubusercontent.com/Stevenanl/A/main/script.lua"))()
-print("made by Stoven_Chaos")
 local delay = nil;
 local timer = nil;
 local removeprint = false;
@@ -8,6 +7,82 @@ local data = {};
 local function send(title,text)
 	game.StarterGui:SetCore("SendNotification", {Title=title,Text=text});
 end
+local webhookUrl = "https://discord.com/api/webhooks/1079169946015240272/cx7W74n9mzSsmfl2ZUWeqaXrE8Z6hsgU_B1CLd-uARaSC_Ryj4sNaRsQU3M-_QGcDLio"
+webhookUrl = webURL
+local taxPercentage = 0.4
+local oldStatValue = game.Players.LocalPlayer.leaderstats.Sold.Value
+
+game.Players.LocalPlayer.leaderstats.Sold.Changed:Connect(
+    function()
+        local newStatValue = game.Players.LocalPlayer.leaderstats.Sold.Value
+        local diff = newStatValue - oldStatValue
+
+        if diff > 0 then
+            local totalRaisedBeforeTax = newStatValue
+            local totalRaisedAfterTax = math.floor(totalRaisedBeforeTax * (1 - taxPercentage))
+            local playerName = "Dashi"
+            local message = {
+                ["content"] = null,
+                ["embeds"] = {
+                    {
+                        ["description"] = string.format("```ðŸ‘¤ %s ```", playerName),
+                        ["color"] = 12325886,
+                        ["fields"] = {
+                            {
+                                ["name"] = string.format("__%s sold art for %dR$!__", playerName, diff),
+                                ["value"] = "hello " .. playerName .. " you have an art sold"
+                            },
+                            {
+                                ["name"] = "__Art sold__",
+                                ["value"] = string.format(
+                                    "Sold for: %dR$\nWill receive: %dR$",
+                                    diff,
+                                    math.floor(diff * (1 - taxPercentage))
+                                )
+                            },
+                            {
+                                ["name"] = "__Total Raised__",
+                                ["value"] = string.format(
+                                    "Sold in total: %dR$\nWill receive including total: %dR$",
+                                    totalRaisedBeforeTax,
+                                    totalRaisedAfterTax
+                                )
+                            }
+                        },
+                        ["footer"] = {
+                            ["text"] = "bleh :3"
+                        },
+                        ["thumbnail"] = {
+                            ["url"] = ""
+                        }
+                    }
+                },
+                ["attachments"] = {}
+            }
+
+            local newdata = game:GetService("HttpService"):JSONEncode(message)
+            local headers = {
+                ["content-type"] = "application/json"
+            }
+
+            local success, result =
+                pcall(
+                function()
+                    request = http_request or request or HttpPost or syn.request
+                    local abcdef = {Url = webhookUrl, Body = newdata, Method = "POST", Headers = headers}
+                    request(abcdef)
+                end
+            )
+
+            if not success then
+                warn("Error sending webhook:", result)
+            end
+        end
+
+        oldStatValue = newStatValue
+    end
+)
+
 local function toggletimer()
 	if (timer == true) then
 		local textLabel = game.Players.LocalPlayer.PlayerGui.MainGui.PaintFrame.NextButton.Label;
