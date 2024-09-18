@@ -106,26 +106,7 @@ local function toggletimer()
 			textLabel.Text = "Ready!!";
 			send("Timer","The timer has ended.");
 			local message = {
-                ["content"] = null,
-                ["embeds"] = {
-                    {
-                        ["description"] = "what is this"
-                        ["color"] = 12325886,
-                        ["fields"] = {
-                            {
-                                ["name"] = "ding ding!"
-                                ["value"] = "hello " .. playerName .. " your art is done."
-                            }
-                        },
-                        ["footer"] = {
-                            ["text"] = "bleh :3"
-                        },
-                        ["thumbnail"] = {
-                            ["url"] = ""
-                        }
-                    }
-                },
-                ["attachments"] = {}
+                ["content"] = "hello "..playerName..", your art is ready"
             }
 
             local newdata = game:GetService("HttpService"):JSONEncode(message)
