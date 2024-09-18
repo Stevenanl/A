@@ -521,14 +521,8 @@ local function check(Object)
 	end
 	if ((Object.Name == "Collision") and (Object.Parent.Name == "MinecartCollision")) then
 		task.wait(1);
-		if (hum.Health ~= 0) and not SeekToggle then
-			Object.CanCollide = true;
-			Object.CFrame = char.Collision.CFrame;
-			Object.CanCollide = false;
-			Object.CFrame = char.Collision.CFrame;
-			send("skipped to minecart.");
-		end--[[ hold on!
 		if multiplayer then
+			LTR.Changed:Wait()
 			if (hum.Health ~= 0) then
 				Object.CanCollide = true;
 				Object.CFrame = char.Collision.CFrame;
@@ -537,7 +531,6 @@ local function check(Object)
 				send("skipped to minecart.");
 			end
 		else
-			LTR.Changed:Wait()
 			if (hum.Health ~= 0) then
 				Object.CanCollide = true;
 				Object.CFrame = char.Collision.CFrame;
