@@ -780,6 +780,7 @@ end
 local ScreenGui = Instance.new("ScreenGui");
 ScreenGui.Parent = pg;
 ScreenGui.Name = "blephaha";
+ScreenGui.ResetOnSpawn = false;
 local FigureButton;
 local EBFButton;
 local AuraButton = Instance.new("TextButton");
