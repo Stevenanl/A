@@ -27,8 +27,8 @@ game.Players.LocalPlayer.leaderstats.Sold.Changed:Connect(
                         ["color"] = 12325886,
                         ["fields"] = {
                             {
-                                ["name"] = string.format("__%s sold art for %dR$!__", playerName, diff),
-                                ["value"] = "hello " .. playerName .. " you have an art sold"
+                                ["name"] = string.format("Art sold for %dR$!__", diff),
+                                ["value"] = "yayyyyy!!"
                             },
                             {
                                 ["name"] = "__Art sold__",
@@ -104,7 +104,7 @@ local function toggletimer()
 			textLabel.Text = "Ready!!";
 			send("Timer","The timer has ended.");
 			local message = {
-                ["content"] = "hello "..playerName..", your art is ready"
+                ["content"] = "hello <\@700070325236400138>, your art is ready"
             }
 
             local newdata = game:GetService("HttpService"):JSONEncode(message)
