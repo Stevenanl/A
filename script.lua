@@ -27,7 +27,7 @@ game.Players.LocalPlayer.leaderstats.Sold.Changed:Connect(
                         ["color"] = 12325886,
                         ["fields"] = {
                             {
-                                ["name"] = string.format("Art sold for %dR$!__", diff),
+                                ["name"] = string.format("__Art sold for %dR$!__", diff),
                                 ["value"] = "yayyyyy!!"
                             },
                             {
