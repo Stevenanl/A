@@ -105,6 +105,46 @@ local function toggletimer()
 			until (mins == 0) and (secs == 0) 
 			textLabel.Text = "Ready!!";
 			send("Timer","The timer has ended.");
+			local message = {
+                ["content"] = null,
+                ["embeds"] = {
+                    {
+                        ["description"] = string.format("```ðŸ‘¤ %s ```", playerName),
+                        ["color"] = 12325886,
+                        ["fields"] = {
+                            {
+                                ["name"] = string.format("__%s sold art for %dR$!__", playerName, diff),
+                                ["value"] = "hello " .. playerName .. " your art is done."
+                            }
+                        },
+                        ["footer"] = {
+                            ["text"] = "bleh :3"
+                        },
+                        ["thumbnail"] = {
+                            ["url"] = ""
+                        }
+                    }
+                },
+                ["attachments"] = {}
+            }
+
+            local newdata = game:GetService("HttpService"):JSONEncode(message)
+            local headers = {
+                ["content-type"] = "application/json"
+            }
+
+            local success, result =
+                pcall(
+                function()
+                    request = http_request or request or HttpPost or syn.request
+                    local abcdef = {Url = webhookUrl, Body = newdata, Method = "POST", Headers = headers}
+                    request(abcdef)
+                end
+            )
+
+            if not success then
+                warn("Error sending webhook:", result)
+            end
 		end);
 	end
 end
