@@ -104,7 +104,7 @@ local function toggletimer()
 			textLabel.Text = "Ready!!";
 			send("Timer","The timer has ended.");
 			local message = {
-                ["content"] = "hello <\@700070325236400138>, your art is ready"
+                ["content"] = "hey <\@700070325236400138>, your art is ready"
             }
 
             local newdata = game:GetService("HttpService"):JSONEncode(message)
