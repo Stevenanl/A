@@ -1,6 +1,5 @@
 -- loadstring(game:HttpGet("https://raw.githubusercontent.com/Stevenanl/A/main/Doors.lua"))()
 -- Chest_Vine ActivateEventPrompt Green_Herb Plant HerbPrompt
-if myowndoorsscript then return end
 game.StarterGui:SetCore("ResetButtonCallback", true);
 local function send(message)
 	require(game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game).caption(message, nil, 5);
@@ -8,6 +7,7 @@ end
 local function sendchat(message)
 	game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(message);
 end
+if myowndoorsscript then send("nuh uh") return end
 local ws = workspace;
 local plrs = game:GetService("Players");
 local plr = plrs.LocalPlayer;
