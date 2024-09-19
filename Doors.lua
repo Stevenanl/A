@@ -66,6 +66,11 @@ end
 if howmanyplayers > 1 then
 	multiplayer = true;
 end
+local virtualUser = game:GetService("VirtualUser");
+plr.Idled:Connect(function()
+	virtualUser:CaptureController();
+	virtualUser:ClickButton2(Vector2.new());
+end);
 pcall(function() getgenv().myowndoorsscript = true end)
 local function setup(room)
 	lagdetect();
