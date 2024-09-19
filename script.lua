@@ -10,7 +10,6 @@ end
 local webhookUrl = "https://discord.com/api/webhooks/1079169946015240272/cx7W74n9mzSsmfl2ZUWeqaXrE8Z6hsgU_B1CLd-uARaSC_Ryj4sNaRsQU3M-_QGcDLio"
 local taxPercentage = 0.2
 local oldStatValue = game.Players.LocalPlayer.leaderstats.Sold.Value
-local playerName = "Dashi"
 game.Players.LocalPlayer.leaderstats.Sold.Changed:Connect(
     function()
         local newStatValue = game.Players.LocalPlayer.leaderstats.Sold.Value
@@ -251,6 +250,7 @@ data['Cat1'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Steven
 data['Cat'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat.lua'))()
 data['Yae Miko'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Yae%20Miko.lua'))()
 data['Luffy'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Luffy.lua'))()
+data['Naruto'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Naruto.lua'))()
 end)
 task.wait(2)
 local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/Vape.txt"))();
@@ -323,7 +323,7 @@ end);
 Artstab:Dropdown("Select Animals Art", {"Cat","Cat1","Cat2","Cat3","Cat4","Cat5","Cat6","Cat7","Cat8","Cat9","Cat10","Cat11","Cat12","Cat13","Cat14","Cat15","Cat16","Cat17","Cat18","Cat19","Cat20","Cat21","Cat22","Cat23","Dog","Penguin"}, function(option)
 	create(option)
 end);
-Artstab:Dropdown("Select Anime Art", {"Tanjiro","Tanjiro2","Anya","Luffy"}, function(option)
+Artstab:Dropdown("Select Anime Art", {"Tanjiro","Tanjiro2","Anya","Luffy","Naruto"}, function(option)
 	create(option)
 end);
 Artstab:Dropdown("Select Genshin Art", {"Kazuha","Raiden Shogun","Nahida","Dori","Diona","Klee","Yae Miko"}, function(option)
