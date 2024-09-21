@@ -556,7 +556,7 @@ local function check(Object)
 		safepart.Size = Vector3.new(100, 1.2, 100)
 		safepart.Anchored = true
 		local pivot = safepart:GetPivot()
-		safepart:PivotTo(pivot * CFrame.new(0,15,0))
+		safepart:PivotTo(pivot * CFrame.new(0,16,0))
 	end
 end
 for i, Object in pairs(CR:GetDescendants()) do
