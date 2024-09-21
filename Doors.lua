@@ -548,6 +548,16 @@ local function check(Object)
 			end
 		end
 	end
+	if Object.Name == "KillBrick" then
+		local safepart = Instance.new("Part", Object.Parent)
+		safepart.Name = "SafeBrick"
+		safepart.Position = Object.Position
+		safepart.Transparency = 1
+		safepart.Size = Vector3.new(100, 1.2, 100)
+		safepart.Anchored = true
+		local pivot = safepart:GetPivot()
+		safepart:PivotTo(pivot * CFrame.new(0,15,0))
+	end
 end
 for i, Object in pairs(CR:GetDescendants()) do
 	check(Object)
