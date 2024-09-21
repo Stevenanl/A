@@ -280,5 +280,5 @@ for i, v in pairs(UI:GetChildren()) do
 end
 local HttpService = game:GetService("HttpService")
 writefile(randomString().."starvart.txt", HttpService:JSONEncode(datacopy))
-send("successfully exported","check your executor workspace folder")
+send("successfully exported","check your executor workspace folder and find starvart.txt")
 end);
