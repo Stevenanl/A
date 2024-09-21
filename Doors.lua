@@ -25,6 +25,7 @@ local SpeedToggle = false;
 local espstuff = {};
 local GameData = rs.GameData;
 local mg = pg.MainUI.Initiator.Main_Game;
+local cutscenes= mg:FindFirstChild("Cutscenes", true)
 local Floor = GameData.Floor;
 local CR = ws.CurrentRooms;
 local Mod = rs.LiveModifiers;
@@ -474,7 +475,8 @@ for i,v in pairs(game:GetDescendants()) do
 		v.BlastPressure = 1
 		v.BlastRadius = 1
 	end
-end]]
+end
+]]
 for i,v in pairs(Lighting:GetDescendants()) do
 	if v:IsA("BlurEffect") or v:IsA("SunRaysEffect") or v:IsA("ColorCorrectionEffect") or v:IsA("BloomEffect") or v:IsA("DepthOfFieldEffect") then
 		v.Enabled = false
@@ -1281,3 +1283,4 @@ plr:GetAttributeChangedSignal("Alive"):Connect(function()
 		pcall(function() AuraFunction:Disconnect() end)
 	end
 end)
+pcall(function() if cutscenes then cutscenes.FigureHotelEnd.Name = "laggycutscene" end end)
