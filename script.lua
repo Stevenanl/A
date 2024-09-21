@@ -168,6 +168,7 @@ data['Cat10'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Steve
 data['Diona'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Diona.lua'))()
 data['Cat9'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat9.lua'))()
 data['Anya'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Anya.lua'))()
+data['Anya2'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Anya2.lua'))()
 data['Klee'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Klee.lua'))()
 data['Cat8'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat8.lua'))()
 data['Cat7'] = loadstring(game:HttpGet('https://raw.githubusercontent.com/Stevenanl/A/main/Cat7.lua'))()
@@ -250,7 +251,7 @@ end);
 Artstab:Dropdown("Select Animals Art", {"Cat","Cat1","Cat2","Cat3","Cat4","Cat5","Cat6","Cat7","Cat8","Cat9","Cat10","Cat11","Cat12","Cat13","Cat14","Cat15","Cat16","Cat17","Cat18","Cat19","Cat20","Cat21","Cat22","Cat23","Dog","Penguin"}, function(option)
 	create(option)
 end);
-Artstab:Dropdown("Select Anime Art", {"Tanjiro","Tanjiro2","Anya","Luffy","Naruto"}, function(option)
+Artstab:Dropdown("Select Anime Art", {"Tanjiro","Tanjiro2","Anya","Anya2","Luffy","Naruto"}, function(option)
 	create(option)
 end);
 Artstab:Dropdown("Select Genshin Art", {"Kazuha","Raiden Shogun","Nahida","Dori","Diona","Klee","Yae Miko"}, function(option)
