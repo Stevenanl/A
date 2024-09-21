@@ -658,6 +658,7 @@ local function ApplySettings(Object)
 							Highlight.FillTransparency = 0.85;
 							Highlight.FillColor = Color;
 							Highlight.OutlineColor = Color;
+							Highlight.OutlineTransparency = 0.75;
 							table.insert(espstuff, Highlight);
 						elseif Target:FindFirstChild("Highlight") then
 							Target.Highlight:Destroy();
