@@ -567,7 +567,7 @@ CR.DescendantAdded:Connect(function(Object)
 end);
 local function ApplySettings(Object)
 	lagdetect();
-	if not lag then
+	if not lag and ESPToggle then
 		task.spawn(function()
 			task.wait();
 			if ((ESP_Items[Object.Name] or ESP_Entities[Object.Name] or ESP_Other[Object.Name]) and (Object.ClassName == "Model")) then
