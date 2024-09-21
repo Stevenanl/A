@@ -1242,6 +1242,14 @@ char:GetAttributeChangedSignal("Hiding"):Connect(function()
         end
     end
 end)
+plr:GetAttributeChangedSignal("CurrentRoom"):Connect(function()
+    if plr:GetAttribute("CurrentRoom") == 49 or plr:GetAttribute("CurrentRoom") == 50 then
+        if Floor.Value == "Mines" then
+            workspace:FindFirstChild("SeekMovingNewClone"):Destroy()
+            workspace:FindFirstChild("SeekMoving"):Destroy()
+        end
+    end
+end);
 plr:GetAttributeChangedSignal("Alive"):Connect(function()
 	if plr:GetAttribute("Alive") then
 		AuraToggle = true;
