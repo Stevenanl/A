@@ -1,5 +1,6 @@
 -- loadstring(game:HttpGet("https://raw.githubusercontent.com/Stevenanl/A/main/Doors.lua"))()
 -- Chest_Vine ActivateEventPrompt Green_Herb Plant HerbPrompt
+if game.PlaceId ~= "6839171747" then return end
 game.StarterGui:SetCore("ResetButtonCallback", true);
 local function send(message)
 	require(game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game).caption(message, nil, 5);
