@@ -660,7 +660,7 @@ local function ApplySettings(Object)
 							Highlight.FillTransparency = 0.85;
 							Highlight.FillColor = Color;
 							Highlight.OutlineColor = Color;
-							Highlight.OutlineTransparency = 0.75;
+							Highlight.OutlineTransparency = 0.4;
 							table.insert(espstuff, Highlight);
 						elseif Target:FindFirstChild("Highlight") then
 							Target.Highlight:Destroy();
@@ -1193,7 +1193,7 @@ char:GetAttributeChangedSignal("Hiding"):Connect(function()
 						if not v:IsA("BasePart") then
 							continue;
 						end
-						v.Transparency = 0.9;
+						v.Transparency = 0.85;
 						table.insert(affectedParts, v);
 					end
 					repeat
@@ -1217,7 +1217,7 @@ plr:GetAttributeChangedSignal("CurrentRoom"):Connect(function()
 		if (Floor.Value == "Mines") then
 			local hadiia = workspace:FindFirstChild("SeekMovingNewClone") or workspace:FindFirstChild("SeekMoving")
 			if hadiia then
-				hadiia.Name == "ThisIsTotallyNotSeek"
+				hadiia.Name = "ThisIsTotallyNotSeek"
 			end
 		end
 	end
