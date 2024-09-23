@@ -426,6 +426,7 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function(promp
     local isChestBox = prompt.Name == "ActivateEventPrompt" and prompt.Parent.Name == "ChestBoxLocked" and prompt.Parent:GetAttribute("Locked")
     local isRoomsDoorLock = prompt.Parent.Parent.Parent.Name == "RoomsDoor_Entrance" and prompt.Enabled
     if isDoorLock or isSkeletenDoor or isChestBox or isRoomsDoorLock then
+        task.wait(isChestBox and 0.15 or 0)
         EntityInfo.DropItem:FireServer(char:FindFirstChild("Lockpick"))
         EntityInfo.DropItem:FireServer(char:FindFirstChild("SkeletonKey"))
     end
