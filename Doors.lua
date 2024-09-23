@@ -402,6 +402,41 @@ for i, room in pairs(CR:GetChildren()) do
 		setup(room);
 	end
 end
+--uhh credit to mspaint :3
+game:GetService("ProximityPromptService").PromptTriggered:Connect(function(prompt, player)
+    if player ~= plr or not char then return end
+    
+    local isDoorLock = prompt.Name == "UnlockPrompt" and prompt.Parent.Name == "Lock" and not prompt.Parent.Parent:GetAttribute("Opened")
+    local isSkeletonDoor = prompt.Name == "SkullPrompt" and prompt.Parent.Name == "SkullLock" and not (prompt.Parent:FindFirstChild("Door") and prompt.Parent.Door.Transparency == 1)
+    local isChestBox = prompt.Name == "ActivateEventPrompt" and prompt.Parent.Name == "ChestBoxLocked" and prompt.Parent:GetAttribute("Locked")
+    local isRoomsDoorLock = prompt.Parent.Parent.Parent.Name == "RoomsDoor_Entrance" and prompt.Enabled
+    
+    if isDoorLock or isSkeletonDoor or isChestBox or isRoomsDoorLock then
+        local equippedTool = char:FindFirstChildOfClass("Tool")
+        local toolId = equippedTool and equippedTool:GetAttribute("ID")
+
+        if equippedTool and equippedTool:GetAttribute("UniversalKey") then
+            task.wait(isChestBox and 0.15 or 0)
+            EntityInfo.DropItem:FireServer(equippedTool)
+
+            task.spawn(function()
+                equippedTool.Destroying:Wait() 
+                task.wait(0.15)
+
+                local itemPickupPrompt
+                for i, thisoneprompt in pairs(equippedTool:GetDescendants()) do
+                    if thisoneprompt.Name == "ModulePrompt" then
+                        itemPickupPrompt = thisoneprompt
+                    end
+                end
+
+                if itemPickupPrompt then
+                    fireproximityprompt(itemPickupPrompt)
+                end
+            end)
+        end
+    end
+end)
 ws.Camera.DescendantAdded:Connect(function(child)
 	if ((child.Name == "Screech") or (child.Name == "ScreechRetro")) then
 		local args = {[1]=true};
@@ -1245,8 +1280,8 @@ end)
 plr:GetAttributeChangedSignal("CurrentRoom"):Connect(function()
     if plr:GetAttribute("CurrentRoom") == 49 or plr:GetAttribute("CurrentRoom") == 50 then
         if Floor.Value == "Mines" then
-            workspace:FindFirstChild("SeekMovingNewClone"):Destroy()
-            workspace:FindFirstChild("SeekMoving"):Destroy()
+            workspace:FindFirstChild("SeekMovingNewClone").Name = "ThisIsTotallyNotSeek""
+            workspace:FindFirstChild("SeekMoving").Name == "ThisIsTotallyNotSeek"
         end
     end
 end);
