@@ -38,6 +38,7 @@ local MotorReplication = EntityInfo.MotorReplication;
 local ESP_Items = {AlarmClock={"AlarmClock",1.5},AlarmClockModel={"AlarmClock",1.5},BandagePack={"BandagePack",1.5},BatteryPack={"BatteryPack",1.5},KeyObtain={"Key",1.5},FuseObtain={"Fuse",1.5},Glowsticks={"Glowsticks",1.5},Bulklight={"BulkLight",1.5},Straplight={"StrapLight",1.5},LaserPointer={"LaserPointer",1.5},Shears={"Shears",1.5},ShieldMini={"Mini Shield",1.5},ShieldBig={"Big Shield",1.5},StarVial={"Starlight Vial",1.5},LiveHintBook={"Book",1.5},Lighter={"Lighter",1.5},Lockpick={"Lockpicks",1.5},Vitamins={"Vitamins",1.5},Crucifix={"Crucifix",1.5},CrucifixWall={"Crucifix",1.5},SkeletonKey={"Skeleton Key",1.5},Flashlight={"Flashlight",1.5},Candle={"Candle",1.5},LiveBreakerPolePickup={"Fuse",1.5},Battery={"Battery",1.5},PickupItem={"Paper",1.5},ElectricalKeyObtain={"Electrical Key",1.5},Shakelight={"Shakelight",1.5},Scanner={"Scanner",1.5}};
 local ESP_Entities = {FigureRig={"Figure",1.5},Grumbo={"Grumble",5},GiggleCeiling={"Giggle",5},RushMoving={"Rush",5},AmbushMoving={"Ambush",5},BackdoorRush={"Blitz",5},FigureRagdoll={"Figure",7},FigureLibrary={"Figure",7},SeekMovingNewClone={"Seek",5.5},SeekMoving={"Seek",5.5},A60={"A-60",10},A120={"A-120",10},Wardrobe={"Wardrobe",5}};
 local ESP_Other = {Toolshed_Small={"Toolshed",5},Chest_Vine={"ChestVine",5},MinesAnchor={"Anchor",5},Door={"Door",5},LeverForGate={"Lever",3},TimerLever={"Lever",3},GoldPile={"Gold",0.5},Bandage={"Bandage",0.5}};
+local DropPrompts = {}
 local EyesOnMap = false;
 local OldEnabled = {};
 local OldEsp = {};
@@ -416,6 +417,55 @@ for i, room in pairs(CR:GetChildren()) do
 		setup(room);
 	end
 end
+function getallprompts()
+	for i, prompts in pairs(ws.Drops:GetDescendants()) do
+		if prompts:IsA("ProximityPrompt") then
+			table.insert(DropPrompts, prompts)
+		end
+	end
+end
+getallprompts()
+ws.Drops.ChildAdded:Connect(function()
+	getallprompts()
+end)
+function GetAllPromptsWithCondition(condition)
+    assert(typeof(condition) == "function", "Expected a function as condition argument but got " .. typeof(condition))
+    
+    local validPrompts = {}
+    for _, prompt in pairs(DropPrompts) do
+        if not prompt or not prompt:IsDescendantOf(workspace) then continue end
+
+        local success, returnData = pcall(function()
+            return condition(prompt)
+        end)
+
+        assert(success, "An error has occured while running condition function.\n" .. tostring(returnData))
+        assert(typeof(returnData) == "boolean", "Expected condition function to return a boolean")
+        
+
+        if returnData then
+            table.insert(validPrompts, prompt)
+        end
+    end
+
+    return validPrompts
+end
+function GetNearestPromptWithCondition(condition)
+    local prompts = GetAllPromptsWithCondition(condition)
+
+    local nearestPrompt = nil
+    local oldHighestDistance = math.huge
+    for _, prompt in pairs(prompts) do
+        local promptParent = prompt:FindFirstAncestorWhichIsA("BasePart") or prompt:FindFirstAncestorWhichIsA("Model")
+
+        if promptParent and plr:DistanceFromCharacter(promptParent) < oldHighestDistance then
+            nearestPrompt = prompt
+            oldHighestDistance = plr:DistanceFromCharacter(promptParent)
+        end
+    end
+
+    return nearestPrompt
+end
 game:GetService("ProximityPromptService").PromptTriggered:Connect(function(prompt, player)
     if player ~= plr or not char then return end
     if Floor.Value == "Fools" then return end
@@ -424,6 +474,8 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function(promp
     local isSkeletonDoor = prompt.Name == "SkullPrompt" and prompt.Parent.Name == "SkullLock" and not (prompt.Parent:FindFirstChild("Door") and prompt.Parent.Door.Transparency == 1)
     local isChestBox = prompt.Name == "ActivateEventPrompt" and prompt.Parent.Name == "ChestBoxLocked" and prompt.Parent:GetAttribute("Locked")
     local isRoomsDoorLock = prompt.Parent.Parent.Parent.Name == "RoomsDoor_Entrance" and prompt.Enabled
+    local equippedTool = char:FindFirstChildOfClass("Tool")
+    local toolId = equippedTool and equippedTool:GetAttribute("ID")
     if isDoorLock or isSkeletenDoor or isChestBox or isRoomsDoorLock then
         task.wait(isChestBox and 0.15 or 0)
         EntityInfo.DropItem:FireServer(char:FindFirstChild("Lockpick"))
@@ -434,21 +486,16 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function(promp
         local shears = char:FindFirstChild("Shears")
         if shears then
             local durability = shears:GetAttribute("Durability")
-            if durability < 1 or durability == 1 then
+            if durability < 1 then
                 EntityInfo.DropItem:FireServer(char:FindFirstChild("Shears"))
             end
         end
     end
     task.wait(.25)
-    local itemPickupPrompt
-    for i, thisoneprompt in pairs(ws.Drops:GetDescendants()) do
-        if thisoneprompt.Name == "ModulePrompt" then
-            itemPickupPrompt = thisoneprompt
-        end
-    end
-    if itemPickupPrompt then
-        fireproximityprompt(itemPickupPrompt)
-    end
+    local itemPickupPrompt = GetNearestPromptWithCondition(function(prompt)
+        return prompt.Name == "ModulePrompt" and prompt.Parent:GetAttribute("Tool_ID") == toolId
+    end)
+    
 end)
 ws.Camera.DescendantAdded:Connect(function(child)
 	if ((child.Name == "Screech") or (child.Name == "ScreechRetro")) then
