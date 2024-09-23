@@ -418,9 +418,7 @@ for i, room in pairs(CR:GetChildren()) do
 end
 game:GetService("ProximityPromptService").PromptTriggered:Connect(function(prompt, player)
     if player ~= plr or not char then return end
-    if char:FindFirstChild("Shears") then
-        EntityInfo.DropItem:FireServer(char:FindFirstChild("Shears"))
-    end
+    local isChestVine = prompt.Name == "ActivateEventPrompt" and prompt.Parent.Name == "Chest_Vine" and prompt.Parent:GetAttribute("Locked")
     local isDoorLock = prompt.Name == "UnlockPrompt" and prompt.Parent.Name == "Lock" and not prompt.Parent.Parent:GetAttribute("Opened")
     local isSkeletonDoor = prompt.Name == "SkullPrompt" and prompt.Parent.Name == "SkullLock" and not (prompt.Parent:FindFirstChild("Door") and prompt.Parent.Door.Transparency == 1)
     local isChestBox = prompt.Name == "ActivateEventPrompt" and prompt.Parent.Name == "ChestBoxLocked" and prompt.Parent:GetAttribute("Locked")
@@ -430,7 +428,17 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function(promp
         EntityInfo.DropItem:FireServer(char:FindFirstChild("Lockpick"))
         EntityInfo.DropItem:FireServer(char:FindFirstChild("SkeletonKey"))
     end
-    task.wait(.35)
+    if isChestVine then
+        task.wait(.15)
+        local shears = char:FindFirstChild("Shears")
+        if shears then
+            local durability = shears:GetAttribute("Durability")
+            if durability < 1 or durability == 1 then
+                EntityInfo.DropItem:FireServer(char:FindFirstChild("Shears"))
+            end
+        end
+    end
+    task.wait(.25)
     local itemPickupPrompt
     for i, thisoneprompt in pairs(ws.Drops:GetDescendants()) do
         if thisoneprompt.Name == "ModulePrompt" then
