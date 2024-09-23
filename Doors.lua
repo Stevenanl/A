@@ -438,7 +438,7 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function(promp
                 task.wait(0.15)
 
                 local itemPickupPrompt
-                for i, thisoneprompt in pairs(ws:GetDescendants()) do
+                for i, thisoneprompt in pairs(ws.Drops:GetDescendants()) do
                     if thisoneprompt.Name == "ModulePrompt" then
                         itemPickupPrompt = thisoneprompt
                     end
