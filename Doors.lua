@@ -430,7 +430,7 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function(promp
         EntityInfo.DropItem:FireServer(char:FindFirstChild("Lockpick"))
         EntityInfo.DropItem:FireServer(char:FindFirstChild("SkeletonKey"))
     end
-    task.wait(.5)
+    task.wait(.35)
     local itemPickupPrompt
     for i, thisoneprompt in pairs(ws.Drops:GetDescendants()) do
         if thisoneprompt.Name == "ModulePrompt" then
