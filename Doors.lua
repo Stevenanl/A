@@ -418,11 +418,18 @@ for i, room in pairs(CR:GetChildren()) do
 end
 game:GetService("ProximityPromptService").PromptTriggered:Connect(function(prompt, player)
     if player ~= plr or not char then return end
-    if char:FindFirstChild("Lockpick") or char:FindFirstChild("SkeletonKey") then
+    if char:FindFirstChild("Shears") then
+        EntityInfo.DropItem:FireServer(char:FindFirstChild("Shears"))
+    end
+    local isDoorLock = prompt.Name == "UnlockPrompt" and prompt.Parent.Name == "Lock" and not prompt.Parent.Parent:GetAttribute("Opened")
+    local isSkeletonDoor = prompt.Name == "SkullPrompt" and prompt.Parent.Name == "SkullLock" and not (prompt.Parent:FindFirstChild("Door") and prompt.Parent.Door.Transparency == 1)
+    local isChestBox = prompt.Name == "ActivateEventPrompt" and prompt.Parent.Name == "ChestBoxLocked" and prompt.Parent:GetAttribute("Locked")
+    local isRoomsDoorLock = prompt.Parent.Parent.Parent.Name == "RoomsDoor_Entrance" and prompt.Enabled
+    if isDoorLock or isSkeletenDoor or isChestBox or isRoomsDoorLock then
         EntityInfo.DropItem:FireServer(char:FindFirstChild("Lockpick"))
         EntityInfo.DropItem:FireServer(char:FindFirstChild("SkeletonKey"))
     end
-    task.wait(.15)
+    task.wait(.5)
     local itemPickupPrompt
     for i, thisoneprompt in pairs(ws.Drops:GetDescendants()) do
         if thisoneprompt.Name == "ModulePrompt" then
