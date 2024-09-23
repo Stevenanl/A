@@ -27,7 +27,7 @@ game.Players.LocalPlayer.leaderstats.Sold.Changed:Connect(
                         ["fields"] = {
                             {
                                 ["name"] = string.format("__Art sold for %dR$!__", diff),
-                                ["value"] = "yayyyyy!!"
+                                ["value"] = "<\@700070325236400138> yayyyyy!!"
                             },
                             {
                                 ["name"] = "__Art sold__",
