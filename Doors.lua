@@ -428,6 +428,8 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function(promp
         task.wait(isChestBox and 0.15 or 0)
         EntityInfo.DropItem:FireServer(char:FindFirstChild("Lockpick"))
         EntityInfo.DropItem:FireServer(char:FindFirstChild("SkeletonKey"))
+        EntityInfo.DropItem:FireServer(char:FindFirstChild("Lockpick"))
+        EntityInfo.DropItem:FireServer(char:FindFirstChild("SkeletonKey"))
     end
     if isChestVine then
         task.wait(.15)
