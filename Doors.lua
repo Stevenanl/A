@@ -1,5 +1,5 @@
 -- loadstring(game:HttpGet("https://raw.githubusercontent.com/Stevenanl/A/main/Doors.lua"))()
--- Chest_Vine ActivateEventPrompt Green_Herb Plant HerbPrompt
+-- Chest_Vine ActivateEventPrompt
 game.StarterGui:SetCore("ResetButtonCallback", true);
 local function send(message)
 	require(game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game).caption(message, nil, 5);
@@ -163,6 +163,20 @@ local function setup(room)
 							repeat
 								task.wait(0.1);
 								if (plr:DistanceFromCharacter(v.PrimaryPart.Position) <= 14) then
+									fireproximityprompt(prompt);
+								end
+							until prompt:GetAttribute("Interactions") or not AuraToggle 
+						end);
+					end
+				elseif (v.Name == "Green_Herb") then
+					local knob = v:WaitForChild("Plant")
+					local prompt = knob:WaitForChild("HerbPrompt")
+					local interactions = prompt:GetAttribute("Interactions");
+					if not interactions then
+						task.spawn(function()
+							repeat
+								task.wait(0.1);
+								if (plr:DistanceFromCharacter(knob.Position) <= 14) then
 									fireproximityprompt(prompt);
 								end
 							until prompt:GetAttribute("Interactions") or not AuraToggle 
