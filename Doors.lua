@@ -839,7 +839,7 @@ end);
 setreadonly(mt, true);
 Lighting = game:GetService("Lighting")
 Lighting.FogEnd = 100000;
-if Floor.Value ~= "Backdoor" then
+if not Floor.Value == "Backdoor" then
 	for i, v in pairs(Lighting:GetDescendants()) do
 		if v:IsA("Atmosphere") then
 			v:Destroy();
