@@ -478,8 +478,7 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function(promp
     local toolId = equippedTool and equippedTool:GetAttribute("ID")
     if isDoorLock or isSkeletenDoor or isChestBox or isRoomsDoorLock then
         task.wait(isChestBox and 0.15 or 0)
-        EntityInfo.DropItem:FireServer(char:FindFirstChild("Lockpick"))
-        EntityInfo.DropItem:FireServer(char:FindFirstChild("SkeletonKey"))
+        EntityInfo.DropItem:FireServer(equippedTool)
     end
     if isChestVine then
         task.wait(.15)
@@ -487,7 +486,7 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function(promp
         if shears then
             local durability = shears:GetAttribute("Durability")
             if durability < 1 then
-                EntityInfo.DropItem:FireServer(char:FindFirstChild("Shears"))
+                EntityInfo.DropItem:FireServer(equippedTool)
             end
         end
     end
@@ -495,7 +494,9 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function(promp
     local itemPickupPrompt = GetNearestPromptWithCondition(function(prompt)
         return prompt.Name == "ModulePrompt" and prompt.Parent:GetAttribute("Tool_ID") == toolId
     end)
-    
+    if itemPickupPrompt then
+        fireproximityprompt(itemPickupPrompt)
+    end
 end)
 ws.Camera.DescendantAdded:Connect(function(child)
 	if ((child.Name == "Screech") or (child.Name == "ScreechRetro")) then
