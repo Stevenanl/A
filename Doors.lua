@@ -1,5 +1,3 @@
--- loadstring(game:HttpGet("https://raw.githubusercontent.com/Stevenanl/A/main/Doors.lua"))()
--- Chest_Vine ActivateEventPrompt
 game.StarterGui:SetCore("ResetButtonCallback", true);
 local function send(message)
 	require(game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game).caption(message, nil, 5);
@@ -7,7 +5,10 @@ end
 local function sendchat(message)
 	game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(message);
 end
-if myowndoorsscript then send("nuh uh") return end
+if myowndoorsscript then
+	send("nuh uh");
+	return;
+end
 local ws = workspace;
 local plrs = game:GetService("Players");
 local plr = plrs.LocalPlayer;
@@ -25,7 +26,7 @@ local SpeedToggle = false;
 local espstuff = {};
 local GameData = rs.GameData;
 local mg = pg.MainUI.Initiator.Main_Game;
-local cutscenes= mg:FindFirstChild("Cutscenes", true)
+local cutscenes = mg:FindFirstChild("Cutscenes", true);
 local Floor = GameData.Floor;
 local CR = ws.CurrentRooms;
 local Mod = rs.LiveModifiers;
@@ -64,7 +65,7 @@ local multiplayer = false;
 for i, v in pairs(plrs:GetChildren()) do
 	howmanyplayers += 1
 end
-if howmanyplayers > 1 then
+if (howmanyplayers > 1) then
 	multiplayer = true;
 end
 local virtualUser = game:GetService("VirtualUser");
@@ -72,7 +73,9 @@ plr.Idled:Connect(function()
 	virtualUser:CaptureController();
 	virtualUser:ClickButton2(Vector2.new());
 end);
-pcall(function() getgenv().myowndoorsscript = true end)
+pcall(function()
+	getgenv().myowndoorsscript = true;
+end);
 local function setup(room)
 	lagdetect();
 	if not lag then
@@ -169,8 +172,8 @@ local function setup(room)
 						end);
 					end
 				elseif (v.Name == "Green_Herb") then
-					local knob = v:WaitForChild("Plant")
-					local prompt = knob:WaitForChild("HerbPrompt")
+					local knob = v:WaitForChild("Plant");
+					local prompt = knob:WaitForChild("HerbPrompt");
 					local interactions = prompt:GetAttribute("Interactions");
 					if not interactions then
 						task.spawn(function()
@@ -416,41 +419,36 @@ for i, room in pairs(CR:GetChildren()) do
 		setup(room);
 	end
 end
---uhh credit to mspaint :3
 game:GetService("ProximityPromptService").PromptTriggered:Connect(function(prompt, player)
-    if player ~= plr or not char then return end
-    
-    local isDoorLock = prompt.Name == "UnlockPrompt" and prompt.Parent.Name == "Lock" and not prompt.Parent.Parent:GetAttribute("Opened")
-    local isSkeletonDoor = prompt.Name == "SkullPrompt" and prompt.Parent.Name == "SkullLock" and not (prompt.Parent:FindFirstChild("Door") and prompt.Parent.Door.Transparency == 1)
-    local isChestBox = prompt.Name == "ActivateEventPrompt" and prompt.Parent.Name == "ChestBoxLocked" and prompt.Parent:GetAttribute("Locked")
-    local isRoomsDoorLock = prompt.Parent.Parent.Parent.Name == "RoomsDoor_Entrance" and prompt.Enabled
-    
-    if isDoorLock or isSkeletonDoor or isChestBox or isRoomsDoorLock then
-        local equippedTool = char:FindFirstChildOfClass("Tool")
-        local toolId = equippedTool and equippedTool:GetAttribute("ID")
-
-        if equippedTool and equippedTool:GetAttribute("UniversalKey") then
-            task.wait(isChestBox and 0.15 or 0)
-            EntityInfo.DropItem:FireServer(equippedTool)
-
-            task.spawn(function()
-                equippedTool.Destroying:Wait() 
-                task.wait(0.15)
-
-                local itemPickupPrompt
-                for i, thisoneprompt in pairs(ws.Drops:GetDescendants()) do
-                    if thisoneprompt.Name == "ModulePrompt" then
-                        itemPickupPrompt = thisoneprompt
-                    end
-                end
-
-                if itemPickupPrompt then
-                    fireproximityprompt(itemPickupPrompt)
-                end
-            end)
-        end
-    end
-end)
+	if ((player ~= plr) or not char) then
+		return;
+	end
+	local isDoorLock = (prompt.Name == "UnlockPrompt") and (prompt.Parent.Name == "Lock") and not prompt.Parent.Parent:GetAttribute("Opened");
+	local isSkeletonDoor = (prompt.Name == "SkullPrompt") and (prompt.Parent.Name == "SkullLock") and not (prompt.Parent:FindFirstChild("Door") and (prompt.Parent.Door.Transparency == 1));
+	local isChestBox = (prompt.Name == "ActivateEventPrompt") and (prompt.Parent.Name == "ChestBoxLocked") and prompt.Parent:GetAttribute("Locked");
+	local isRoomsDoorLock = (prompt.Parent.Parent.Parent.Name == "RoomsDoor_Entrance") and prompt.Enabled;
+	if (isDoorLock or isSkeletonDoor or isChestBox or isRoomsDoorLock) then
+		local equippedTool = char:FindFirstChildOfClass("Tool");
+		local toolId = equippedTool and equippedTool:GetAttribute("ID");
+		if (equippedTool and equippedTool:GetAttribute("UniversalKey")) then
+			task.wait((isChestBox and 0.15) or 0);
+			EntityInfo.DropItem:FireServer(equippedTool);
+			task.spawn(function()
+				equippedTool.Destroying:Wait();
+				task.wait(0.15);
+				local itemPickupPrompt;
+				for i, thisoneprompt in pairs(ws.Drops:GetDescendants()) do
+					if (thisoneprompt.Name == "ModulePrompt") then
+						itemPickupPrompt = thisoneprompt;
+					end
+				end
+				if itemPickupPrompt then
+					fireproximityprompt(itemPickupPrompt);
+				end
+			end);
+		end
+	end
+end);
 ws.Camera.DescendantAdded:Connect(function(child)
 	if ((child.Name == "Screech") or (child.Name == "ScreechRetro")) then
 		local args = {[1]=true};
@@ -459,9 +457,8 @@ ws.Camera.DescendantAdded:Connect(function(child)
 		else
 			game:GetService("ReplicatedStorage"):WaitForChild("RemotesFolder"):WaitForChild("Screech"):FireServer(unpack(args));
 		end
-		send("hey, there\'s.. something behind you")
+		send("hey, there\'s.. something behind you");
 	end
-	-- laggy. child:Destroy();
 end);
 local ScreechSafeRooms = {};
 if Mod:FindFirstChild("LightsOut") then
@@ -504,35 +501,13 @@ if Mod:FindFirstChild("Jammin") then
 	game.SoundService.Main.Jamming.Enabled = false;
 	mg.Health.Jam.Playing = false;
 end
---[[ was thinking about adding an antilag but im not sure if it will make it less laggier
-local Terrain = workspace:FindFirstChildOfClass('Terrain')
-Terrain.WaterWaveSize = 0
-Terrain.WaterWaveSpeed = 0
-Terrain.WaterReflectance = 0
-Terrain.WaterTransparency = 0
-Lighting.GlobalShadows = false
-Lighting.FogEnd = 9e9
-for i,v in pairs(game:GetDescendants()) do
-	if v:IsA("Part") or v:IsA("UnionOperation") or v:IsA("MeshPart") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
-		v.Material = "Plastic"
-		v.Reflectance = 0
-	elseif v:IsA("Decal") then
-		v.Transparency = 1
-	elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
-		v.Lifetime = NumberRange.new(0)
-	elseif v:IsA("Explosion") then
-		v.BlastPressure = 1
-		v.BlastRadius = 1
-	end
-end
-]]
-for i,v in pairs(Lighting:GetDescendants()) do
-	if v:IsA("BlurEffect") or v:IsA("SunRaysEffect") or v:IsA("ColorCorrectionEffect") or v:IsA("BloomEffect") or v:IsA("DepthOfFieldEffect") then
-		v.Enabled = false
+for i, v in pairs(Lighting:GetDescendants()) do
+	if (v:IsA("BlurEffect") or v:IsA("SunRaysEffect") or v:IsA("ColorCorrectionEffect") or v:IsA("BloomEffect") or v:IsA("DepthOfFieldEffect")) then
+		v.Enabled = false;
 	end
 end
 local function check(Object)
-	lagdetect()
+	lagdetect();
 	if not lag then
 		task.spawn(function()
 			if Object:IsA("ProximityPrompt") then
@@ -577,7 +552,7 @@ local function check(Object)
 	end
 	if ((Object.Name == "Collision") and (Object.Parent.Name == "MinecartCollision")) then
 		if multiplayer then
-			LTR.Changed:Wait()
+			LTR.Changed:Wait();
 			task.wait(1.5);
 			if (hum.Health ~= 0) then
 				Object.CanCollide = true;
@@ -587,7 +562,7 @@ local function check(Object)
 				send("skipped to minecart.");
 			end
 		else
-			task.wait(.5)
+			task.wait(0.5);
 			if (hum.Health ~= 0) then
 				Object.CanCollide = true;
 				Object.CFrame = char.Collision.CFrame;
@@ -597,26 +572,26 @@ local function check(Object)
 			end
 		end
 	end
-	if Object.Name == "KillBrick" then
-		local safepart = Instance.new("Part", Object.Parent)
-		safepart.Name = "SafeBrick"
-		safepart.Position = Object.Position
-		safepart.Transparency = 1
-		safepart.Size = Vector3.new(100, 1.2, 100)
-		safepart.Anchored = true
-		local pivot = safepart:GetPivot()
-		safepart:PivotTo(pivot * CFrame.new(0,15,0))
+	if (Object.Name == "KillBrick") then
+		local safepart = Instance.new("Part", Object.Parent);
+		safepart.Name = "SafeBrick";
+		safepart.Position = Object.Position;
+		safepart.Transparency = 1;
+		safepart.Size = Vector3.new(100, 1.2, 100);
+		safepart.Anchored = true;
+		local pivot = safepart:GetPivot();
+		safepart:PivotTo(pivot * CFrame.new(0, 15, 0));
 	end
 end
 for i, Object in pairs(CR:GetDescendants()) do
-	check(Object)
+	check(Object);
 end
 CR.DescendantAdded:Connect(function(Object)
-	check(Object)
+	check(Object);
 end);
 local function ApplySettings(Object)
 	lagdetect();
-	if not lag and ESPToggle then
+	if (not lag and ESPToggle) then
 		task.spawn(function()
 			task.wait();
 			if ((ESP_Items[Object.Name] or ESP_Entities[Object.Name] or ESP_Other[Object.Name]) and (Object.ClassName == "Model")) then
@@ -642,37 +617,15 @@ local function ApplySettings(Object)
 					if IsValid then
 						if Bool then
 							local TXT = IsValid[1];
-							if (IsValid[1] == "Door") then--[[ Broken.
-								local RoomName;
-								if (Floor.Value == "Rooms") then
-									RoomName = "";
-								else
-									CR:WaitForChild(tonumber(Object.Parent.Name) + 1, math.huge);
-									local OldString = CR[tonumber(Object.Parent.Name) + 1]:GetAttribute("OriginalName"):sub(7, 99);
-									local NewString = "";
-									for i = 1, #OldString do
-										if (i == 1) then
-											NewString = NewString .. OldString:sub(i, i);
-											continue
-										end
-										if ((OldString:sub(i, i) == OldString:sub(i, i):upper()) and (OldString:sub(i - 1, i - 1) ~= "_")) then
-											NewString = NewString .. " ";
-										end
-										if (OldString:sub(i, i) ~= "_") then
-											NewString = NewString .. OldString:sub(i, i);
-										end
-									end
-									RoomName = " (" .. NewString .. ")";
-								end
-								TXT = "Door " .. (((Floor.Value == "Rooms") and "A-") or "") .. (tonumber(Object.Parent.Name) + 1) .. LTR.Value;]]
+							if (IsValid[1] == "Door") then
 								TXT = "";
 							end
 							if (IsValid[1] == "Wardrobe") then
 								TXT = "";
 							end
 							if (IsValid[1] == "Anchor") then
-								local sign = Object:WaitForChild("Sign", 5)
-								if sign and sign:FindFirstChild("TextLabel") then
+								local sign = Object:WaitForChild("Sign", 5);
+								if (sign and sign:FindFirstChild("TextLabel")) then
 									TXT = string.format("Anchor %s", sign.TextLabel.Text);
 								end
 							end
@@ -772,37 +725,13 @@ local function ApplySettings(Object)
 				end
 			end
 		end
-	end--[[
-	task.spawn(function()
-		if Object:IsA('ForceField') then
-			RunService.Heartbeat:Wait()
-			Object:Destroy()
-		elseif Object:IsA('Sparkles') then
-			RunService.Heartbeat:Wait()
-			Object:Destroy()
-		elseif Object:IsA('Smoke') or Object:IsA('Fire') then
-			RunService.Heartbeat:Wait()
-			Object:Destroy()
-		end
-		if Object:IsA("Part") or Object:IsA("UnionOperation") or Object:IsA("MeshPart") or Object:IsA("CornerWedgePart") or Object:IsA("TrussPart") then
-			Object.Material = "Plastic"
-			Object.Reflectance = 0
-		elseif Object:IsA("Decal") then
-			Object.Transparency = 1
-		elseif Object:IsA("ParticleEmitter") or Object:IsA("Trail") then
-			Object.Lifetime = NumberRange.new(0)
-		elseif Object:IsA("Explosion") then
-			Object.BlastPressure = 1
-			Object.BlastRadius = 1
-		end
-	end)]]
+	end
 end
 for _, Player in pairs(game.Players:GetPlayers()) do
 	if (Player ~= plr) then
 		ESP_Other[Player.Name] = {Player.DisplayName,4};
 	end
 end
---tried to bypass wet floor but failed horribly 😭
 for _, v in pairs(char:GetDescendants()) do
 	if ((v.Name == "Massless") and (v == true)) then
 		v = false;
@@ -817,14 +746,6 @@ for _, Object in pairs(ws:GetDescendants()) do
 	ApplySettings(Object);
 end
 ws.DescendantAdded:Connect(ApplySettings);
---[[ broken.
-ws.ChildRemoved:Connect(function(Object)
-	if (Object.Name == "Eyes") or Object.Name == "BackdoorLookman" then
-		if Floor.Value == "Backdoor" and not ws:FindFirstChild("BackdoorLookman") or not ws:FindFirstChild("Eyes") then
-			EyesOnMap = false;
-		end
-	end
-end);]]
 local mt = getrawmetatable(game);
 local old_mt = mt.__namecall;
 setreadonly(mt, false);
@@ -838,7 +759,7 @@ mt.__namecall = newcclosure(function(remote, ...)
 	return old_mt(remote, table.unpack(args));
 end);
 setreadonly(mt, true);
-Lighting = game:GetService("Lighting")
+Lighting = game:GetService("Lighting");
 Lighting.FogEnd = 100000;
 for i, v in pairs(Lighting:GetDescendants()) do
 	if v:IsA("Atmosphere") then
@@ -1073,7 +994,7 @@ AuraButton.MouseButton1Down:Connect(function()
 		end);
 	elseif AuraToggle then
 		AuraToggle = false;
-		AuraFunction:Disconnect()
+		AuraFunction:Disconnect();
 		AuraButton.Text = "Aura";
 		AuraButton.BackgroundColor3 = Color3.fromRGB(50, 205, 50);
 	end
@@ -1261,43 +1182,45 @@ SpeedButton.MouseButton1Down:Connect(function()
 end);
 char:GetAttributeChangedSignal("Hiding"):Connect(function()
 	if char:GetAttribute("Hiding") then
-        for _, obj in pairs(CR:GetDescendants()) do
-            if not obj:IsA("ObjectValue") and obj.Name ~= "HiddenPlayer" then continue end
-
-            if obj.Value == char then
-                task.spawn(function()
-                    local affectedParts = {}
-                    for _, v in pairs(obj.Parent:GetChildren()) do
-                        if not v:IsA("BasePart") then continue end
-
-                        v.Transparency = 0.9
-                        table.insert(affectedParts, v)
-                    end
-
-                    repeat task.wait()
-                        for _, part in pairs(affectedParts) do
-                            task.wait()
-                            part.Transparency = 0.9
-                        end
-                    until not char:GetAttribute("Hiding")
-                    
-                    for _, v in pairs(affectedParts) do
-                        v.Transparency = 0
-                    end
-                end)
-
-                break
-            end
-        end
-    end
-end)
+		for _, obj in pairs(CR:GetDescendants()) do
+			if (not obj:IsA("ObjectValue") and (obj.Name ~= "HiddenPlayer")) then
+				continue;
+			end
+			if (obj.Value == char) then
+				task.spawn(function()
+					local affectedParts = {};
+					for _, v in pairs(obj.Parent:GetChildren()) do
+						if not v:IsA("BasePart") then
+							continue;
+						end
+						v.Transparency = 0.9;
+						table.insert(affectedParts, v);
+					end
+					repeat
+						task.wait();
+						for _, part in pairs(affectedParts) do
+							task.wait();
+							part.Transparency = 0.9;
+						end
+					until not char:GetAttribute("Hiding") 
+					for _, v in pairs(affectedParts) do
+						v.Transparency = 0;
+					end
+				end);
+				break;
+			end
+		end
+	end
+end);
 plr:GetAttributeChangedSignal("CurrentRoom"):Connect(function()
-    if plr:GetAttribute("CurrentRoom") == 49 or plr:GetAttribute("CurrentRoom") == 50 then
-        if Floor.Value == "Mines" then
-            workspace:FindFirstChild("SeekMovingNewClone").Name = "ThisIsTotallyNotSeek"
-            workspace:FindFirstChild("SeekMoving").Name == "ThisIsTotallyNotSeek"
-        end
-    end
+	if ((plr:GetAttribute("CurrentRoom") == 49) or (plr:GetAttribute("CurrentRoom") == 50)) then
+		if (Floor.Value == "Mines") then
+			local hadiia = workspace:FindFirstChild("SeekMovingNewClone") or workspace:FindFirstChild("SeekMoving")
+			if hadiia then
+				hadiia.Name == "ThisIsTotallyNotSeek"
+			end
+		end
+	end
 end);
 plr:GetAttributeChangedSignal("Alive"):Connect(function()
 	if plr:GetAttribute("Alive") then
@@ -1348,7 +1271,13 @@ plr:GetAttributeChangedSignal("Alive"):Connect(function()
 			ESPButton.Position = UDim2.new(0, 150, 0, -30);
 			ChatWarnButton.Position = UDim2.new(0, 190, 0, -30);
 		end
-		pcall(function() AuraFunction:Disconnect() end)
+		pcall(function()
+			AuraFunction:Disconnect();
+		end);
 	end
-end)
-pcall(function() if cutscenes then cutscenes.FigureHotelEnd.Name = "laggycutscene" end end)
+end);
+pcall(function()
+	if cutscenes then
+		cutscenes.FigureHotelEnd.Name = "laggycutscene";
+	end
+end);
