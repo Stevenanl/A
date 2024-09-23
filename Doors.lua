@@ -418,6 +418,7 @@ for i, room in pairs(CR:GetChildren()) do
 end
 game:GetService("ProximityPromptService").PromptTriggered:Connect(function(prompt, player)
     if player ~= plr or not char then return end
+    if Floor.Value == "Fools" then return end
     local isChestVine = prompt.Name == "ActivateEventPrompt" and prompt.Parent.Name == "Chest_Vine" and prompt.Parent:GetAttribute("Locked")
     local isDoorLock = prompt.Name == "UnlockPrompt" and prompt.Parent.Name == "Lock" and not prompt.Parent.Parent:GetAttribute("Opened")
     local isSkeletonDoor = prompt.Name == "SkullPrompt" and prompt.Parent.Name == "SkullLock" and not (prompt.Parent:FindFirstChild("Door") and prompt.Parent.Door.Transparency == 1)
