@@ -829,7 +829,7 @@ mt.__namecall = newcclosure(function(remote, ...)
 	return old_mt(remote, table.unpack(args));
 end);
 setreadonly(mt, true);
-if not Floor.Value == "Backdoor" then
+if Floor.Value ~= "Backdoor" then
 	Lighting = game:GetService("Lighting")
 	Lighting.FogEnd = 100000;
 	for i, v in pairs(Lighting:GetDescendants()) do
