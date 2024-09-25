@@ -442,6 +442,10 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function(promp
             end
         end
     end
+    task.wait(.15)
+    fireproximityprompt(ws.Drops:FindFirstChild("Lockpick").ModulePrompt)
+    fireproximityprompt(ws.Drops:FindFirstChild("SkeletonKey").ModulePrompt)
+    fireproximityprompt(ws.Drops:FindFirstChild("Shears").ModulePrompt)
 end)
 ws.Camera.DescendantAdded:Connect(function(child)
 	if ((child.Name == "Screech") or (child.Name == "ScreechRetro")) then
