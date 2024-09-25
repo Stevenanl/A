@@ -444,7 +444,7 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function(promp
             end
         end
     end
-    task.wait(.15)
+    task.wait(.30)
     local item
     for i, v in pairs(ws.Drops:GetDescendants()) do
         if v.Name == "ModulePrompt" then
