@@ -437,7 +437,8 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function(promp
         if shears then
             local durability = shears:GetAttribute("Durability")
             if durability < 1 then
-                EntityInfo.DropItem:FireServer(equippedTool)
+                EntityInfo.DropItem:FireServer(shears)
+                EntityInfo.DropItem:FireServer(shears)
             end
         end
     end
