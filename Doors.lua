@@ -427,7 +427,6 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function(promp
     local equippedTool = char:FindFirstChildOfClass("Tool")
     local toolId = equippedTool and equippedTool:GetAttribute("ID")
     if isDoorLock or isSkeletenDoor or isChestBox or isRoomsDoorLock then
-        equippedTool.Destroying:Wait() 
         task.wait(isChestBox and 0.15 or 0)
         EntityInfo.DropItem:FireServer(equippedTool)
         EntityInfo.DropItem:FireServer(equippedTool)
@@ -440,16 +439,22 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function(promp
         if shears then
             local durability = shears:GetAttribute("Durability")
             if durability < 1 then
-                equippedTool.Destroying:Wait() 
                 EntityInfo.DropItem:FireServer(shears)
                 EntityInfo.DropItem:FireServer(shears)
             end
         end
     end
+    equippedTool.Destroying:Wait() 
     task.wait(.15)
-    fireproximityprompt(ws.Drops:FindFirstChild("Lockpick").ModulePrompt)
-    fireproximityprompt(ws.Drops:FindFirstChild("SkeletonKey").ModulePrompt)
-    fireproximityprompt(ws.Drops:FindFirstChild("Shears").ModulePrompt)
+    local item
+    for i, v in pairs(ws.Drops:GetDescendants()) do
+        if v.Name == "ModulePrompt" then
+            if v.Parent:GetAttribute("Tool_ID") == toolId then
+                item = v
+            end
+        end
+    end
+    fireproximityprompt(item)
 end)
 ws.Camera.DescendantAdded:Connect(function(child)
 	if ((child.Name == "Screech") or (child.Name == "ScreechRetro")) then
