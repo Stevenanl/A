@@ -443,7 +443,6 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function(promp
             end
         end
     end
-    equippedTool.Destroying:Wait()
     task.wait(.15)
     local item
     for i, v in pairs(ws.Drops:GetDescendants()) do
