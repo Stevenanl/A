@@ -432,6 +432,10 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function(promp
         EntityInfo.DropItem:FireServer(equippedTool)
         EntityInfo.DropItem:FireServer(equippedTool)
         EntityInfo.DropItem:FireServer(equippedTool)
+        EntityInfo.DropItem:FireServer(equippedTool)
+        EntityInfo.DropItem:FireServer(equippedTool)
+        EntityInfo.DropItem:FireServer(equippedTool)
+        EntityInfo.DropItem:FireServer(equippedTool)
     end
     if isChestVine then
         task.wait(.15)
