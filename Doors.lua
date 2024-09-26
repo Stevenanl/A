@@ -424,14 +424,13 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function(promp
     local isSkeletonDoor = prompt.Name == "SkullPrompt" and prompt.Parent.Name == "SkullLock" and not (prompt.Parent:FindFirstChild("Door") and prompt.Parent.Door.Transparency == 1)
     local isChestBox = prompt.Name == "ActivateEventPrompt" and prompt.Parent.Name == "ChestBoxLocked" and prompt.Parent:GetAttribute("Locked")
     local isRoomsDoorLock = prompt.Parent.Parent.Parent.Name == "RoomsDoor_Entrance" and prompt.Enabled
-    local equippedTool = char:FindFirstChild("Lockpick") or char:FindFirstChild("SkeletonKey")
+    local equippedTool = char:FindFirstChildOfClass("Tool")
     local toolId = equippedTool and equippedTool:GetAttribute("ID")
     if isDoorLock or isSkeletenDoor or isChestBox or isRoomsDoorLock then
-        task.wait(isChestBox and 0.15 or 0)
-        EntityInfo.DropItem:FireServer(equippedTool)
-        EntityInfo.DropItem:FireServer(equippedTool)
-        EntityInfo.DropItem:FireServer(equippedTool)
-        EntityInfo.DropItem:FireServer(equippedTool)
+        if equippedTool:GetAttribute("UniversalKey") then
+            task.wait(isChestBox and 0.15 or 0)
+            EntityInfo.DropItem:FireServer(equippedTool)
+        end
     end
     if isChestVine then
         task.wait(.15)
@@ -444,7 +443,7 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function(promp
             end
         end
     end
-    task.wait(.30)
+    task.wait(.15)
     local item
     for i, v in pairs(ws.Drops:GetDescendants()) do
         if v.Name == "ModulePrompt" then
