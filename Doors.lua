@@ -417,7 +417,7 @@ for i, room in pairs(CR:GetChildren()) do
 	end
 end
 game:GetService("ProximityPromptService").PromptTriggered:Connect(function(prompt, player)
-    if player ~= plr or not char then return end
+    if player ~= plr then return end
     if Floor.Value == "Fools" then return end
     local isChestVine = prompt.Name == "ActivateEventPrompt" and prompt.Parent.Name == "Chest_Vine" and prompt.Parent:GetAttribute("Locked")
     local isDoorLock = prompt.Name == "UnlockPrompt" and prompt.Parent.Name == "Lock" and not prompt.Parent.Parent:GetAttribute("Opened")
@@ -428,10 +428,6 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function(promp
     local toolId = equippedTool and equippedTool:GetAttribute("ID")
     if isDoorLock or isSkeletenDoor or isChestBox or isRoomsDoorLock then
         task.wait(isChestBox and 0.15 or 0)
-        EntityInfo.DropItem:FireServer(equippedTool)
-        EntityInfo.DropItem:FireServer(equippedTool)
-        EntityInfo.DropItem:FireServer(equippedTool)
-        EntityInfo.DropItem:FireServer(equippedTool)
         EntityInfo.DropItem:FireServer(equippedTool)
         EntityInfo.DropItem:FireServer(equippedTool)
         EntityInfo.DropItem:FireServer(equippedTool)
