@@ -23,7 +23,7 @@ game.Players.LocalPlayer.leaderstats.Sold.Changed:Connect(function()
 	if (diff > 0) then
 		local totalRaisedBeforeTax = newStatValue;
 		local totalRaisedAfterTax = math.floor(totalRaisedBeforeTax * (1 - taxPercentage));
-		local message = {content=null,embeds={{description="",color=12325886,fields={{name=string.format("__Art sold for %dR$!__", diff),value="<\@700070325236400138> yayyyyy!!"},{name="__Art sold__",value=string.format("Sold for: %dR$\nWill receive: %dR$", diff, math.floor(diff * (1 - taxPercentage)))},{name="__Total Raised__",value=string.format("Sold in total: %dR$\nWill receive including total: %dR$", totalRaisedBeforeTax, totalRaisedAfterTax)}},footer={text="bleh :3"},thumbnail={url=""}}},attachments={}};
+		local message = {content="<\@700070325236400138> Art sold.",embeds={{description="",color=12325886,fields={{name=string.format("__Art sold for %dR$!__", diff),value="<\@700070325236400138> yayyyyy!!"},{name="__Art sold__",value=string.format("Sold for: %dR$\nWill receive: %dR$", diff, math.floor(diff * (1 - taxPercentage)))},{name="__Total Raised__",value=string.format("Sold in total: %dR$\nWill receive including total: %dR$", totalRaisedBeforeTax, totalRaisedAfterTax)}},footer={text="bleh :3"},thumbnail={url=""}}},attachments={}};
 		local newdata = game:GetService("HttpService"):JSONEncode(message);
 		local headers = {["content-type"]="application/json"};
 		local success, result = pcall(function()
