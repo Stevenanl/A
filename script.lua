@@ -2,7 +2,8 @@
 local delay = nil;
 local timer = nil;
 local removeprint = false;
-local player = game:GetService("Players").LocalPlayer;
+local Players = game:GetService("Players");
+local player = Players.LocalPlayer;
 local paintgui = player.PlayerGui.MainGui.PaintFrame;
 local data = {};
 local function send(title, text)
@@ -144,11 +145,10 @@ Otherstab:Toggle("Hide PaintFrame", false, function(toggle)
 	end
 end);
 Otherstab:Textbox("Goto player", true, function(t)
-	local Players = game:GetService("Players");
 	local targetPlayer = nil;
-	for _, player in ipairs(Players:GetPlayers()) do
-		if ((player.DisplayName == t) or (player.Name == t)) then
-			targetPlayer = player;
+	for _, plr in ipairs(Players:GetPlayers()) do
+		if ((plr.DisplayName == t) or (plr.Name == t)) then
+			targetPlayer = plr;
 			break;
 		end
 	end
