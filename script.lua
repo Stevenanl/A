@@ -132,7 +132,7 @@ task.spawn(function()
 end);
 task.wait(2);
 local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/Vape.txt"))();
-local win = lib:Window("STARVING ARTISTS", Color3.fromRGB(188, 19, 254), Enum.KeyCode.RightControl);
+local win = lib:Window("STARVING ARTISTS", Color3.fromRGB(178, 34, 34), Enum.KeyCode.RightControl);
 local Artstab = win:Tab("Arts");
 local Visualstab = win:Tab("Visuals");
 local Otherstab = win:Tab("Others");
