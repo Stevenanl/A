@@ -447,7 +447,7 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function(promp
     local item
     for i, v in pairs(ws.Drops:GetDescendants()) do
         if v.Name == "ModulePrompt" then
-            if v.Parent:GetAttribute("Tool_ID") == toolId then
+            if v.Parent:GetAttribute("Tool_ID") == toolId and v:GetAttribute("UniversalKey") then
                 item = v
             end
         end
