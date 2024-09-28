@@ -11,6 +11,7 @@ if myowndoorsscript then send("nuh uh") return end
 local ws = workspace;
 local plrs = game:GetService("Players");
 local plr = plrs.LocalPlayer;
+local alive = plr:GetAttribute("Alive");
 local pg = plr.PlayerGui;
 local char = plr.Character;
 local hum = char.Humanoid;
@@ -1299,10 +1300,29 @@ char:GetAttributeChangedSignal("Hiding"):Connect(function()
     end
 end)
 plr:GetAttributeChangedSignal("CurrentRoom"):Connect(function()
-    if plr:GetAttribute("CurrentRoom") == 49 or plr:GetAttribute("CurrentRoom") == 50 then
+    if plr:GetAttribute("CurrentRoom") == 49 or plr:GetAttribute("CurrentRoom") == 50 or plr:GetAttribute("CurrentRoom") == 99 then
         if Floor.Value == "Mines" then
             workspace:FindFirstChild("SeekMovingNewClone").Name = "ThisIsTotallyNotSeek"
             workspace:FindFirstChild("SeekMoving").Name = "ThisIsTotallyNotSeek"
+        end
+    elseif plr:GetAttribute("CurrentRoom") == 51 then
+        if Floor.Value == "Hotel" then
+            if FigureButton.Visible == true then
+                FigureButton.Visible = false
+                if (hum.Health == 0) then
+					ESPButton.Position = UDim2.new(0, 150, 0, -30);
+					ChatWarnButton.Position = UDim2.new(0, 190, 0, -30);
+				else
+					AuraButton.Position = UDim2.new(0, 150, 0, -30);
+					ESPButton.Position = UDim2.new(0, 190, 0, -30);
+					FlyButton.Position = UDim2.new(0, 230, 0, -30);
+					ChatWarnButton.Position = UDim2.new(0, 270, 0, -30);
+					InstantButton.Position = UDim2.new(0, 310, 0, -30);
+					SeekButton.Position = UDim2.new(0, 350, 0, -30);
+					EBFButton.Position = UDim2.new(0, 390, 0, -30);
+					SpeedButton.Position = UDim2.new(0, 430, 0, -30);
+				end
+            end
         end
     end
 end);
