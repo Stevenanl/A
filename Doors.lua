@@ -417,13 +417,6 @@ for i, room in pairs(CR:GetChildren()) do
 	end
 end
 game:GetService("ProximityPromptService").PromptTriggered:Connect(function(prompt, player)
-local c = game:GetService("Players").LocalPlayer.Character:FindFirstChild("Shears")
-if c then
-task.wait(.15)
-game:GetService("ReplicatedStorage").RemotesFolder.DropItem:FireServer(c)
-end
-end
-game:GetService("ProximityPromptService").PromptTriggered:Connect(function(prompt, player)
     if player ~= plr then return end
     if Floor.Value == "Fools" then return end
     local isChestVine = prompt.Name == "ActivateEventPrompt" and prompt.Parent.Name == "Chest_Vine" and prompt.Parent:GetAttribute("Locked")
