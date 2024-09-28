@@ -553,18 +553,15 @@ local infitems = game:GetService("ProximityPromptService").PromptTriggered:Conne
             end
         end
     end
-    task.wait(.15)
-    local item
-    for i, v in pairs(ws.Drops:GetDescendants()) do
-        if v.Name == "ModulePrompt" then
-            if v.Parent:GetAttribute("Tool_ID") == toolId and v:GetAttribute("UniversalKey") then
-                item = v
-            end
-        end
-    end
-    if item then
-        fireproximityprompt(item)
-    end
+    ws.Drops.ChildAdded:Once(function(droppedItem)
+		if (droppedItem.Name == "Lockpick") or (droppedItem.Name == "SkeletonKey") then
+			local targetProximityPrompt = droppedItem:WaitForChild("ModulePrompt", 3) or droppedItem:FindFirstChildOfClass("ProximityPrompt");
+			repeat
+				task.wait();
+				fireproximityprompt(targetProximityPrompt);
+			until not droppedItem:IsDescendantOf(ws) 
+		end
+	end);
 end)
 ws.Camera.DescendantAdded:Connect(function(child)
 	if ((child.Name == "Screech") or (child.Name == "ScreechRetro")) then
