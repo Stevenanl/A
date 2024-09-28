@@ -1324,6 +1324,10 @@ plr:GetAttributeChangedSignal("CurrentRoom"):Connect(function()
 				end
             end
         end
+    elseif plr:GetAttribute("CurrentRoom") == 100 then
+        if Floor.Value == "Hotel" then
+            --something
+        end
     end
 end);
 plr:GetAttributeChangedSignal("Alive"):Connect(function()
