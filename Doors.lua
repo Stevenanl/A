@@ -14,6 +14,7 @@ local plr = plrs.LocalPlayer;
 local alive = plr:GetAttribute("Alive");
 local pg = plr.PlayerGui;
 local char = plr.Character;
+local collision = char:WaitForChild("Collision");
 local hum = char.Humanoid;
 local rs = game:GetService("ReplicatedStorage");
 local AuraToggle = true;
@@ -62,6 +63,7 @@ local NoGold = Mod:FindFirstChild("GoldSpawnNone");
 local NoItem = Mod:FindFirstChild("ItemSpawnNone");
 local howmanyplayers = 0;
 local multiplayer = false;
+local InfiniteCrucifixMovingEntitiesVelocity = {RushMoving={threshold=52,minDistance=55},RushNew={threshold=52,minDistance=55},AmbushMoving={threshold=70,minDistance=80}};
 for i, v in pairs(plrs:GetChildren()) do
 	howmanyplayers += 1
 end
@@ -73,6 +75,23 @@ plr.Idled:Connect(function()
 	virtualUser:CaptureController();
 	virtualUser:ClickButton2(Vector2.new());
 end);
+function IsInViewOfPlayer(instance: Instance, range: number | nil)
+	if not instance then
+		return false;
+	end
+	if not collision then
+		return false;
+	end
+	local raycastParams = RaycastParams.new();
+	raycastParams.FilterType = Enum.RaycastFilterType.Exclude;
+	raycastParams.FilterDescendantsInstances = {char};
+	local direction = (instance:GetPivot().Position - collision.Position).unit * (range or 8999999488);
+	local raycast = ws:Raycast(collision.Position, direction, raycastParams);
+	if (raycast and raycast.Instance:IsDescendantOf(instance)) then
+		return true;
+	end
+	return false;
+end
 pcall(function() getgenv().myowndoorsscript = true end)
 local function setup(room)
 	lagdetect();
@@ -417,9 +436,99 @@ for i, room in pairs(CR:GetChildren()) do
 		setup(room);
 	end
 end
-game:GetService("ProximityPromptService").PromptTriggered:Connect(function(prompt, player)
+ws.ChildAdded:Connect(function(child)
+	if (((child.Name == "RushMoving") or (child.Name == "AmbushMoving")) and alive and char) then
+		task.wait(1.5);
+		local hasStoppedMoving = false;
+		local lastPosition = child:GetPivot().Position;
+		local lastVelocity = Vector3.new(0, 0, 0);
+		local frameCount = 0;
+		local nextTimer = tick();
+		local maxSavedFrames = 10;
+		local currentSavedFrames = 0;
+		local physicsTickRate = (1 / 60) * 0.9;
+		local oldFrameHz = 0;
+		local frameHz = 0;
+		local frameRate = 1;
+		local nextTimerHz = tick();
+		local entityName = child.Name;
+		local crucifixConnection;
+		crucifixConnection = game:GetService("RunService").RenderStepped:Connect(function(deltaTime)
+			if (not alive or not char) then
+				crucifixConnection:Disconnect();
+				return;
+			end
+			local currentTimer = tick();
+			frameCount += 1
+			frameHz += 1
+			if ((currentTimer - nextTimerHz) >= frameRate) then
+				oldFrameHz = frameHz;
+				frameHz = 0;
+				nextTimerHz = currentTimer;
+				physicsTickRate = (1 / oldFrameHz) * 0.9;
+			end
+			if ((physicsTickRate == 0) or not ((currentTimer - nextTimer) >= physicsTickRate)) then
+				return;
+			end
+			frameCount = 0;
+			nextTimer = currentTimer;
+			local currentPosition = child:GetPivot().Position;
+			local velocity = (currentPosition - lastPosition) / deltaTime;
+			velocity = Vector3.new(velocity.X, 0, velocity.Z);
+			local smoothedVelocity = lastVelocity:Lerp(velocity, 0.3);
+			local entityVelocity = math.floor(smoothedVelocity.Magnitude);
+			lastVelocity = smoothedVelocity;
+			lastPosition = currentPosition;
+			local inView = IsInViewOfPlayer(child, InfiniteCrucifixMovingEntitiesVelocity[entityName].minDistance);
+			local distanceFromPlayer = (child:GetPivot().Position - char:GetPivot().Position).Magnitude;
+			local isInRangeOfPlayer = distanceFromPlayer <= InfiniteCrucifixMovingEntitiesVelocity[entityName].minDistance;
+			if (entityVelocity <= InfiniteCrucifixMovingEntitiesVelocity[entityName].threshold) then
+				if ((entityVelocity <= 0.5) and (currentSavedFrames <= maxSavedFrames)) then
+					currentSavedFrames += 1
+				end
+				if not hasStoppedMoving then
+					hasStoppedMoving = true;
+				end
+				if not inView then
+					return;
+				end
+				if not isInRangeOfPlayer then
+					return;
+				end
+				print("[HEURISTIC FINISH] --> Item dropped!");
+				if char:FindFirstChild("Crucifix") then
+					ws.Drops.ChildAdded:Once(function(droppedItem)
+						if (droppedItem.Name == "Crucifix") then
+							local targetProximityPrompt = droppedItem:WaitForChild("ModulePrompt", 3) or droppedItem:FindFirstChildOfClass("ProximityPrompt");
+							repeat
+								task.wait();
+								fireproximityprompt(targetProximityPrompt);
+							until not droppedItem:IsDescendantOf(ws) 
+						end
+					end);
+					print("[TOOL] Crucifix dropped!");
+					game:GetService("ReplicatedStorage"):WaitForChild("RemotesFolder"):WaitForChild("DropItem"):FireServer(char.Crucifix);
+				end
+				return;
+			end
+			currentSavedFrames = 0;
+			if hasStoppedMoving then
+				hasStoppedMoving = false;
+			end
+		end);
+		local childRemovedConnection;
+		childRemovedConnection = ws.ChildRemoved:Connect(function(model)
+			if (model ~= child) then
+				return;
+			end
+			crucifixConnection:Disconnect();
+			childRemovedConnection:Disconnect();
+		end);
+	end
+end);
+local infitems = game:GetService("ProximityPromptService").PromptTriggered:Connect(function(prompt, player)
     if player ~= plr then return end
-    if Floor.Value == "Fools" then return end
+    if Floor.Value == "Fools" then infitems:Disconnect() end
     local isChestVine = prompt.Name == "ActivateEventPrompt" and prompt.Parent.Name == "Chest_Vine" and prompt.Parent:GetAttribute("Locked")
     local isDoorLock = prompt.Name == "UnlockPrompt" and prompt.Parent.Name == "Lock" and not prompt.Parent.Parent:GetAttribute("Opened")
     local isSkeletonDoor = prompt.Name == "SkullPrompt" and prompt.Parent.Name == "SkullLock" and not (prompt.Parent:FindFirstChild("Door") and prompt.Parent.Door.Transparency == 1)
@@ -511,7 +620,7 @@ if Mod:FindFirstChild("Jammin") then
 	mg.Health.Jam.Playing = false;
 end
 --[[ was thinking about adding an antilag but im not sure if it will make it less laggier
-local Terrain = workspace:FindFirstChildOfClass('Terrain')
+local Terrain = ws:FindFirstChildOfClass('Terrain')
 Terrain.WaterWaveSize = 0
 Terrain.WaterWaveSpeed = 0
 Terrain.WaterReflectance = 0
@@ -1302,8 +1411,8 @@ end)
 plr:GetAttributeChangedSignal("CurrentRoom"):Connect(function()
     if plr:GetAttribute("CurrentRoom") == 49 or plr:GetAttribute("CurrentRoom") == 50 or plr:GetAttribute("CurrentRoom") == 99 then
         if Floor.Value == "Mines" then
-            workspace:FindFirstChild("SeekMovingNewClone").Name = "ThisIsTotallyNotSeek"
-            workspace:FindFirstChild("SeekMoving").Name = "ThisIsTotallyNotSeek"
+            ws:FindFirstChild("SeekMovingNewClone").Name = "ThisIsTotallyNotSeek"
+            ws:FindFirstChild("SeekMoving").Name = "ThisIsTotallyNotSeek"
         end
     elseif plr:GetAttribute("CurrentRoom") == 51 then
         if Floor.Value == "Hotel" then
