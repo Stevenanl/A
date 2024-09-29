@@ -540,6 +540,15 @@ local infitems = game:GetService("ProximityPromptService").PromptTriggered:Conne
         if equippedTool:GetAttribute("UniversalKey") then
             task.wait(isChestBox and 0.15 or 0)
             EntityInfo.DropItem:FireServer(equippedTool)
+            ws.Drops.ChildAdded:Once(function(droppedItem)
+        		if (droppedItem.Name == "Lockpick") or (droppedItem.Name == "SkeletonKey") then
+			        local targetProximityPrompt = droppedItem:WaitForChild("ModulePrompt", 3) or droppedItem:FindFirstChildOfClass("ProximityPrompt");
+			        repeat
+				        task.wait(.15);
+		        		fireproximityprompt(targetProximityPrompt);
+	        		until not droppedItem:IsDescendantOf(ws) 
+        		end
+        	end);
         end
     end
     if isChestVine then
@@ -549,19 +558,18 @@ local infitems = game:GetService("ProximityPromptService").PromptTriggered:Conne
             local durability = shears:GetAttribute("Durability")
             if durability < 1 then
                 EntityInfo.DropItem:FireServer(shears)
-                EntityInfo.DropItem:FireServer(shears)
+                ws.Drops.ChildAdded:Once(function(droppedItem)
+	            	if (droppedItem.Name == "Shears") then
+		            	local targetProximityPrompt = droppedItem:WaitForChild("ModulePrompt", 3) or droppedItem:FindFirstChildOfClass("ProximityPrompt");
+	            		repeat
+            				task.wait(.15);
+	            			fireproximityprompt(targetProximityPrompt);
+            			until not droppedItem:IsDescendantOf(ws) 
+            		end
+            	end);
             end
         end
     end
-    ws.Drops.ChildAdded:Once(function(droppedItem)
-		if (droppedItem.Name == "Lockpick") or (droppedItem.Name == "SkeletonKey") then
-			local targetProximityPrompt = droppedItem:WaitForChild("ModulePrompt", 3) or droppedItem:FindFirstChildOfClass("ProximityPrompt");
-			repeat
-				task.wait(.15);
-				fireproximityprompt(targetProximityPrompt);
-			until not droppedItem:IsDescendantOf(ws) 
-		end
-	end);
 end)
 ws.Camera.DescendantAdded:Connect(function(child)
 	if ((child.Name == "Screech") or (child.Name == "ScreechRetro")) then
