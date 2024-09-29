@@ -539,7 +539,6 @@ local infitems = game:GetService("ProximityPromptService").PromptTriggered:Conne
     if isDoorLock or isSkeletenDoor or isChestBox or isRoomsDoorLock then
         if equippedTool:GetAttribute("UniversalKey") then
             task.wait(isChestBox and 0.15 or 0)
-            EntityInfo.DropItem:FireServer(equippedTool)
             ws.Drops.ChildAdded:Once(function(droppedItem)
         		if (droppedItem.Name == "Lockpick") or (droppedItem.Name == "SkeletonKey") then
 			        local targetProximityPrompt = droppedItem:WaitForChild("ModulePrompt", 3) or droppedItem:FindFirstChildOfClass("ProximityPrompt");
@@ -549,6 +548,7 @@ local infitems = game:GetService("ProximityPromptService").PromptTriggered:Conne
 	        		until not droppedItem:IsDescendantOf(ws) 
         		end
         	end);
+            EntityInfo.DropItem:FireServer(equippedTool)
         end
     end
     if isChestVine then
@@ -557,7 +557,6 @@ local infitems = game:GetService("ProximityPromptService").PromptTriggered:Conne
         if shears then
             local durability = shears:GetAttribute("Durability")
             if durability < 1 then
-                EntityInfo.DropItem:FireServer(shears)
                 ws.Drops.ChildAdded:Once(function(droppedItem)
 	            	if (droppedItem.Name == "Shears") then
 		            	local targetProximityPrompt = droppedItem:WaitForChild("ModulePrompt", 3) or droppedItem:FindFirstChildOfClass("ProximityPrompt");
@@ -567,6 +566,7 @@ local infitems = game:GetService("ProximityPromptService").PromptTriggered:Conne
             			until not droppedItem:IsDescendantOf(ws) 
             		end
             	end);
+                EntityInfo.DropItem:FireServer(shears)
             end
         end
     end
