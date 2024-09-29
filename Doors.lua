@@ -453,8 +453,10 @@ ws.ChildAdded:Connect(function(child)
 		local nextTimerHz = tick();
 		local entityName = child.Name;
 		local crucifixConnection;
+		print("Started connection.");
 		crucifixConnection = game:GetService("RunService").RenderStepped:Connect(function(deltaTime)
 			if (not alive or not char) then
+				print("Connection stopped.");
 				crucifixConnection:Disconnect();
 				return;
 			end
@@ -521,6 +523,7 @@ ws.ChildAdded:Connect(function(child)
 			if (model ~= child) then
 				return;
 			end
+			print("Connection stopped, no crucifix.");
 			crucifixConnection:Disconnect();
 			childRemovedConnection:Disconnect();
 		end);
