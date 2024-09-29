@@ -557,7 +557,7 @@ local infitems = game:GetService("ProximityPromptService").PromptTriggered:Conne
 		if (droppedItem.Name == "Lockpick") or (droppedItem.Name == "SkeletonKey") then
 			local targetProximityPrompt = droppedItem:WaitForChild("ModulePrompt", 3) or droppedItem:FindFirstChildOfClass("ProximityPrompt");
 			repeat
-				task.wait();
+				task.wait(.15);
 				fireproximityprompt(targetProximityPrompt);
 			until not droppedItem:IsDescendantOf(ws) 
 		end
