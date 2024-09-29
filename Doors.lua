@@ -510,6 +510,7 @@ ws.ChildAdded:Connect(function(child)
 					end);
 					print("[TOOL] Crucifix dropped!");
 					game:GetService("ReplicatedStorage"):WaitForChild("RemotesFolder"):WaitForChild("DropItem"):FireServer(char.Crucifix);
+					game:GetService("ReplicatedStorage"):WaitForChild("RemotesFolder"):WaitForChild("DropItem"):FireServer(char.Crucifix);
 				end
 				return;
 			end
