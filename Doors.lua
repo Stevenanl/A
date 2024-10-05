@@ -541,7 +541,7 @@ local infitems = game:GetService("ProximityPromptService").PromptTriggered:Conne
     local equippedTool = char:FindFirstChild("Lockpick") or char:FindFirstChild("SkeletonKey")
     local toolId = equippedTool and equippedTool:GetAttribute("ID")
     if isDoorLock or isSkeletenDoor or isChestBox or isRoomsDoorLock then
-        if equippedTool:GetAttribute("UniversalKey") then
+        if equippedTool then
             task.wait(isChestBox and 0.15 or 0)
             ws.Drops.ChildAdded:Once(function(droppedItem)
         		if (droppedItem.Name == "Lockpick") or (droppedItem.Name == "SkeletonKey") then
