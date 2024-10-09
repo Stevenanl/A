@@ -532,6 +532,7 @@ end);
 local infitems = game:GetService("ProximityPromptService").PromptTriggered:Connect(function(prompt, player)
     if player ~= plr then return end
     if Floor.Value == "Fools" then infitems:Disconnect() end
+    local isVine = prompt.Name == "ActivateEventPrompt" and prompt.Parent:FindFirstChild("Vines")
     local isChestVine = prompt.Name == "ActivateEventPrompt" and prompt.Parent.Name == "Chest_Vine" and prompt.Parent:GetAttribute("Locked")
     local isDoorLock = prompt.Name == "UnlockPrompt" and prompt.Parent.Name == "Lock" and not prompt.Parent.Parent:GetAttribute("Opened")
     local isSkeletonDoor = prompt.Name == "SkullPrompt" and prompt.Parent.Name == "SkullLock" and not (prompt.Parent:FindFirstChild("Door") and prompt.Parent.Door.Transparency == 1)
@@ -554,7 +555,7 @@ local infitems = game:GetService("ProximityPromptService").PromptTriggered:Conne
             EntityInfo.DropItem:FireServer(equippedTool)
         end
     end
-    if isChestVine then
+    if isChestVine or isVine then
         task.wait(.15)
         local shears = char:FindFirstChild("Shears")
         if shears then
