@@ -742,6 +742,56 @@ end
 CR.DescendantAdded:Connect(function(Object)
 	check(Object)
 end);
+ws.ChildAdded:Connect(function(Object)
+	if ((Object.Name == "RushMoving") and (Floor.Value ~= "Rooms")) then
+		repeat
+			task.wait();
+		until (plr:DistanceFromCharacter(Object:GetPivot().Position) < 1000) or (not Object.Parent == ws) or (hum.Health == 0) 
+		if (Object.Parent == ws) then
+			send("Rush Spawned!");
+			if ChatWarnToggle then
+				task.wait(1.4);
+				sendchat("rush, hide!!");
+			end
+		end
+	elseif ((Object.Name == "AmbushMoving") and (Floor.Value ~= "Rooms")) then
+		repeat
+			task.wait();
+		until (plr:DistanceFromCharacter(Object:GetPivot().Position) < 1000) or (not Object.Parent == ws) or (hum.Health == 0) 
+		if (Object.Parent == ws) then
+			send("Ambush Spawned!");
+			if ChatWarnToggle then
+				task.wait(1.4);
+				local blephaso = ((Floor.Value == "Mines") and "ambush, get ready to switch lockers!!") or "ambush, hide!!";
+				sendchat(blephaso);
+			end
+		end
+	elseif (Object.Name == "A60") then
+		send("A-60 Spawned!");
+		if ChatWarnToggle then
+			task.wait(1.4);
+			sendchat("a-60, hide!!");
+		end
+	elseif (Object.Name == "A120") then
+		send("A-120 Spawned!");
+		if ChatWarnToggle then
+			task.wait(1.4);
+			sendchat("a-120, hide!!");
+		end
+	elseif (Object.Name == "BackdoorRush") then
+		send("Blitz Spawned!");
+		if ChatWarnToggle then
+			task.wait(1.4);
+			sendchat("blitz, hide!!");
+		end
+	elseif (Object.Name == "SallyWindow") then
+		send("Sally Spawned!");
+		if ChatWarnToggle then
+			task.wait(1.4);
+			sendchat("theres something in the window.");
+		end
+	end
+end);
 local function ApplySettings(Object)
 	lagdetect();
 	if not lag and ESPToggle then
@@ -847,48 +897,6 @@ local function ApplySettings(Object)
 				ApplyHighlight(ESP_Other[Object.Name], ESPToggle);
 			end
 		end);
-	end
-	if ((Object.Name == "RushMoving") and (Floor.Value ~= "Rooms")) then
-		repeat
-			task.wait();
-		until (plr:DistanceFromCharacter(Object:GetPivot().Position) < 1000) or (not Object.Parent == ws) or (hum.Health == 0) 
-		if (Object.Parent == ws) then
-			send("Rush Spawned!");
-			if ChatWarnToggle then
-				task.wait(1.4);
-				sendchat("rush, hide!!");
-			end
-		end
-	elseif ((Object.Name == "AmbushMoving") and (Floor.Value ~= "Rooms")) then
-		repeat
-			task.wait();
-		until (plr:DistanceFromCharacter(Object:GetPivot().Position) < 1000) or (not Object.Parent == ws) or (hum.Health == 0) 
-		if (Object.Parent == ws) then
-			send("Ambush Spawned!");
-			if ChatWarnToggle then
-				task.wait(1.4);
-				local blephaso = ((Floor.Value == "Mines") and "ambush, get ready to switch lockers!!") or "ambush, hide!!";
-				sendchat(blephaso);
-			end
-		end
-	elseif (Object.Name == "A60") then
-		send("A-60 Spawned!");
-		if ChatWarnToggle then
-			task.wait(1.4);
-			sendchat("a-60, hide!!");
-		end
-	elseif (Object.Name == "A120") then
-		send("A-120 Spawned!");
-		if ChatWarnToggle then
-			task.wait(1.4);
-			sendchat("a-120, hide!!");
-		end
-	elseif (Object.Name == "BackdoorRush") then
-		send("Blitz Spawned!");
-		if ChatWarnToggle then
-			task.wait(1.4);
-			sendchat("blitz, hide!!");
-		end
 	end
 	if (Object.Name == "FigureRig") then
 		if (Floor.Value == "Mines") then
