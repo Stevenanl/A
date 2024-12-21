@@ -702,7 +702,7 @@ local function check(Object)
 				end
 			end
 		end);
-	end
+	end--[[
 	if ((Object.Name == "Collision") and (Object.Parent.Name == "MinecartCollision")) then
 		if multiplayer then
 			LTR.Changed:Wait()
@@ -724,7 +724,7 @@ local function check(Object)
 				send("skipped to minecart.");
 			end
 		end
-	end
+	end]]
 	if Object.Name == "KillBrick" then
 		local safepart = Instance.new("Part", Object.Parent)
 		safepart.Name = "SafeBrick"
