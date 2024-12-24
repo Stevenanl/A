@@ -63,7 +63,7 @@ local NoGold = Mod:FindFirstChild("GoldSpawnNone");
 local NoItem = Mod:FindFirstChild("ItemSpawnNone");
 local howmanyplayers = 0;
 local multiplayer = false;
-local InfiniteCrucifixMovingEntitiesVelocity = {RushMoving={threshold=52,minDistance=55},RushNew={threshold=52,minDistance=55},AmbushMoving={threshold=70,minDistance=80}};
+local InfiniteCrucifixMovingEntitiesVelocity = {RushMoving={threshold=52,minDistance=55},BackdoorRush={threshold=52,minDistance=55},A120={threshold=52,minDistance=55},A60={threshold=52,minDistance=55},RushNew={threshold=52,minDistance=55},AmbushMoving={threshold=70,minDistance=80}};
 for i, v in pairs(plrs:GetChildren()) do
 	howmanyplayers += 1
 end
