@@ -441,7 +441,7 @@ for i, room in pairs(CR:GetChildren()) do
 	end
 end
 ws.ChildAdded:Connect(function(child)
-	if (((child.Name == "RushMoving") or (child.Name == "AmbushMoving")) and alive and char) then
+	if (((child.Name == "RushMoving") or (child.Name == "A60") or (child.Name == "A120") or (child.Name == "BackdoorRush") or (child.Name == "AmbushMoving")) and alive and char) then
 		task.wait(1.5);
 		local hasStoppedMoving = false;
 		local lastPosition = child:GetPivot().Position;
