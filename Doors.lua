@@ -791,11 +791,9 @@ ws.ChildAdded:Connect(function(Object)
 			sendchat("theres something in the window.");
 		end
 	elseif (Object.Name == "GlitchAmbush") then
-		send("AR0xMBUSH Spawned!");
-		if ChatWarnToggle then
-			task.wait(1.4);
-			sendchat("AR0xMBUSH H@S SPÄW!NED");
-		end
+		send("AR0xMBUSH SPÄW!NED");
+	elseif (Object.Name == "GlitchRush") then
+		send("RNIUSHCg== SPÄW!NED");
 	end
 end);
 local function ApplySettings(Object)
