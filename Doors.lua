@@ -580,7 +580,7 @@ local infitems = game:GetService("ProximityPromptService").PromptTriggered:Conne
     end
 end)
 ws.Camera.DescendantAdded:Connect(function(child)
-	if ((child.Name == "Screech") or (child.Name == "ScreechRetro")) then
+	if ((child.Name == "GlitchScreech") or (child.Name == "Screech") or (child.Name == "ScreechRetro")) then
 		local args = {[1]=true};
 		if (Floor.Value == "Fools") then
 			game:GetService("ReplicatedStorage"):WaitForChild("EntityInfo"):WaitForChild("Screech"):FireServer(unpack(args));
