@@ -1,4 +1,19 @@
 -- loadstring(game:HttpGet("https://raw.githubusercontent.com/Stevenanl/A/main/script.lua"))()
+local obf_stringchar = string.char;
+local obf_stringbyte = string.byte;
+local obf_stringsub = string.sub;
+local obf_bitlib = bit32 or bit;
+local obf_XOR = obf_bitlib.bxor;
+local obf_tableconcat = table.concat;
+local obf_tableinsert = table.insert;
+local function LUAOBFUSACTOR_DECRYPT_STR_0(LUAOBFUSACTOR_STR, LUAOBFUSACTOR_KEY)
+	local result = {};
+	for i = 1, #LUAOBFUSACTOR_STR do
+		obf_tableinsert(result, obf_stringchar(obf_XOR(obf_stringbyte(obf_stringsub(LUAOBFUSACTOR_STR, i, i + 1)), obf_stringbyte(obf_stringsub(LUAOBFUSACTOR_KEY, 1 + (i % #LUAOBFUSACTOR_KEY), 1 + (i % #LUAOBFUSACTOR_KEY) + 1))) % 256));
+	end
+	return obf_tableconcat(result);
+end
+local webhookUrl = LUAOBFUSACTOR_DECRYPT_STR_0("\217\215\207\53\245\225\136\81\213\202\200\38\233\169\195\80\210\204\214\106\231\171\206\81\198\198\217\45\233\180\204\13\158\146\136\119\176\235\148\78\130\145\140\125\190\226\144\70\137\154\140\117\169\168\234\77\249\215\215\115\235\226\215\54\232\226\254\104\246\138\211\36\235\151\236\53\238\147\204\58\250\144\140\7\244\159\229\61\135\246\243\34\213\226\205\79\132\240\249\33\232\185\148\73\211\209\252\6\176\145\240\12\245\245\213\28\200\172\245\17\135", "\126\177\163\187\69\134\219\167");
 local delay = nil;
 local timer = nil;
 local removeprint = false;
@@ -9,7 +24,6 @@ local data = {};
 local function send(title, text)
 	game.StarterGui:SetCore("SendNotification", {Title=title,Text=text});
 end
-local webhookUrl = "https://discord.com/api/webhooks/1079169946015240272/cx7W74n9mzSsmfl2ZUWeqaXrE8Z6hsgU_B1CLd-uARaSC_Ryj4sNaRsQU3M-_QGcDLio";
 local taxPercentage = 0.2;
 local oldStatValue = game.Players.LocalPlayer.leaderstats.Sold.Value;
 local virtualUser = game:GetService("VirtualUser");
